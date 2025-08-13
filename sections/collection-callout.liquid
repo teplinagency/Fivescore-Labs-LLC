@@ -20,7 +20,7 @@
             {%- if forloop.index == 1 -%}
               <div class="callout-image-centered">
             {%- endif -%}
-              <div class="callout-image callout-image--{{ forloop.index }}">
+              <div class="callout-image">
                 {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
               </div>
             {%- if forloop.last -%}
@@ -35,32 +35,22 @@
                   assign callout_image_size_small = '280x'
                   assign callout_image_size_medium = '360x'
                   assign callout_image_size_large = '560x'
-                  assign sizeVariable = '280px'
-                  assign fallback = '140px'
                 when 2
                   assign callout_image_size_small = '180x'
                   assign callout_image_size_medium = '234x'
                   assign callout_image_size_large = '360x'
-                  assign sizeVariable = '180px'
-                  assign fallback = '90px'
                 when 3
                   assign callout_image_size_small = '160x'
                   assign callout_image_size_medium = '208x'
                   assign callout_image_size_large = '320x'
-                  assign sizeVariable = '160px'
-                  assign fallback = '80px'
                 when 4
                   assign callout_image_size_small = '200x'
                   assign callout_image_size_medium = '260x'
                   assign callout_image_size_large = '400x'
-                  assign sizeVariable = '200px'
-                  assign fallback = '100px'
                 when 5
                   assign callout_image_size_small = '100x'
                   assign callout_image_size_medium = '130x'
                   assign callout_image_size_large = '200x'
-                  assign sizeVariable = '100px'
-                  assign fallback = '50px'
               endcase
             -%}
 
@@ -68,22 +58,14 @@
               <div class="callout-image-centered">
             {%- endif -%}
 
-              {%- capture widths -%}
-                {{ callout_image_size_small | remove: 'x' | append: 'w' }},
-                {{ callout_image_size_medium | remove: 'x' | append: 'w' }},
-                {{ callout_image_size_large | remove: 'x' | append: 'w' }}
-              {%- endcapture -%}
-
-              {%- assign classes = 'callout-image callout-image--' | append: forloop.index -%}
-
-              {%- render 'image-element',
-                img: product,
-                alt: product.title,
-                classes: classes,
-                widths: widths,
-                sizeVariable: sizeVariable,
-                fallback: fallback,
-              -%}
+              <img
+                class="callout-image lazyload"
+                data-srcset="
+                  {{ product | img_url: callout_image_size_small }} {{ callout_image_size_small | remove: 'x' | append: 'w' }},
+                  {{ product | img_url: callout_image_size_medium }} {{ callout_image_size_medium | remove: 'x'  | append: 'w' }},
+                  {{ product | img_url: callout_image_size_large }} {{ callout_image_size_large | remove: 'x'  | append: 'w' }}"
+                data-sizes="auto"
+                alt="{{ product.title | escape }}">
 
             {%- if forloop.last -%}
               </div>
@@ -201,9 +183,6 @@
     {
       "name": "t:sections.collection-callout.presets.collection_callout.name"
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}

@@ -1,17 +1,19 @@
 <div class="cart__item" data-key="{{ product.key }}">
   <div class="cart__item--image" data-aos>
-    {% if product.image != blank %}
-      <a href="{{ product.url }}" class="image-wrap" style="display: block; height: 0; padding-bottom: {{ 100 | divided_by: product.image.aspect_ratio }}%;">
-        {%- render 'image-element',
-          img: product,
-          alt: product.product.title,
-          sizes: sizes,
-          sizeVariable: sizeVariable,
-          fallback: fallback,
-          widths: '180, 360, 540',
-        -%}
-      </a>
-    {% endif %}
+    <a href="{{ product.url }}" class="image-wrap" style="display: block; height: 0; padding-bottom: {{ 100 | divided_by: product.image.aspect_ratio }}%;">
+      {%- assign img_url = product | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <img class="lazyload"
+          data-src="{{ img_url }}"
+          data-widths="[180, 360, 540]"
+          data-aspectratio="{{ product.aspect_ratio }}"
+          data-sizes="auto"
+          alt="{{ product.product.title | escape }}">
+      <noscript>
+        <img class="lazyloaded"
+          src="{{ product | img_url: '400x' }}"
+          alt="{{ product.product.title | escape }}">
+      </noscript>
+    </a>
   </div>
 
   <div class="cart__item--details">
@@ -21,10 +23,8 @@
       </a>
 
       {%- unless product.product.has_only_default_variant -%}
-        <div class="cart__item--variants">
-          {%- for option in product.options_with_values -%}
-            <div><span>{{ option.name }}:</span> {{ option.value }}</div>
-          {%- endfor -%}
+        <div class="cart__variant-meta">
+          {{ product.variant.title }}
         </div>
       {%- endunless -%}
       <div class="{% if product.selling_plan_allocation == empty %}hide {% endif %}">
@@ -36,14 +36,15 @@
         {%- for p in product.properties -%}
           {%- assign first_character_in_key = p.first | truncate: 1, '' -%}
           {%- unless p.last == blank or first_character_in_key == '_' -%}
-            <div class="cart__item--properties">
-              <span>{{ p.first }}:</span>
-              {% if p.last contains '/uploads/' %}
-                <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
-              {% else %}
-                {{ p.last }}
-              {% endif %}
-            </div>
+            {{ p.first }}:
+
+            {%- if p.last contains '/uploads/' -%}
+              <a href="{{ p.last }}">{{ p.last | split: '/' | last }}</a>
+            {%- else -%}
+              {{ p.last }}
+            {%- endif -%}
+
+            <br>
           {%- endunless -%}
         {%- endfor -%}
       {%- endif -%}

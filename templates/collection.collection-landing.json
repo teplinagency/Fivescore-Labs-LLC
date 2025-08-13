@@ -11,6 +11,7 @@
   "sections": {
     "main-collection": {
       "type": "main-collection",
+      "disabled": true,
       "blocks": {
         "collection_description": {
           "type": "collection_description",
@@ -25,7 +26,6 @@
         "collection_description",
         "product_grid"
       ],
-      "disabled": true,
       "settings": {}
     },
     "slideshow": {

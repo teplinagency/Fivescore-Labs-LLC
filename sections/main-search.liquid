@@ -12,7 +12,7 @@
       </h1>
     </header>
 
-    {%- render 'predictive-search', context: 'search-page' -%}
+    {%- render 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--page' -%}
 
     {%- if search.performed -%}
 
@@ -39,11 +39,11 @@
             per_row: section.settings.per_row
           %}
         {%- endif -%}
-
-        {%- if paginate.pages > 1 -%}
-          {%- render 'pagination', paginate: paginate -%}
-        {%- endif -%}
       </div>
+
+      {%- if paginate.pages > 1 -%}
+        {%- render 'pagination', paginate: paginate -%}
+      {%- endif -%}
 
     {%- endif -%}
   </div>
@@ -77,12 +77,6 @@
       "id": "enable_color_swatches",
       "label": "t:sections.main-search.settings.enable_color_swatches.label",
       "info": "t:sections.main-search.settings.enable_color_swatches.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_swatch_labels",
-      "label": "t:common.enable_swatch_labels.label",
-      "default": true
     },
     {
       "type": "checkbox",

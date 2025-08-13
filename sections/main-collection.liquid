@@ -24,13 +24,15 @@
           <div class="parallax-image" data-movement="15%" data-parallax-image data-angle="{{ section.settings.parallax_direction }}">
       {%- endif -%}
 
-        {%- render 'image-element',
+        {% render 'image-element'
           img: collection.image,
           img_width: 2400,
           classes: 'collection-hero__image image-fit',
+          alt: collection.image.alt,
           preload: true,
           loading: 'eager',
-        -%}
+          sizes: '100%'
+        %}
 
       {%- if section.settings.parallax -%}
           </div>
@@ -215,12 +217,6 @@
       "id": "enable_color_swatches",
       "label": "t:sections.main-collection.settings.enable_color_swatches.label",
       "info": "t:sections.main-collection.settings.enable_color_swatches.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_swatch_labels",
-      "label": "t:common.enable_swatch_labels.label",
-      "default": true
     },
     {
       "type": "checkbox",

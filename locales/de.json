@@ -44,11 +44,11 @@
     },
     "social": {
       "share_on_facebook": "Teilen",
-      "share_on_x": "Teilen",
+      "share_on_twitter": "Twittern",
       "share_on_pinterest": "Pinnen",
       "alt_text": {
         "share_on_facebook": "Auf Facebook teilen",
-        "share_on_x": "Auf X twittern",
+        "share_on_twitter": "Auf Twitter twittern",
         "share_on_pinterest": "Auf Pinterest pinnen"
       }
     },
@@ -58,19 +58,15 @@
       "submit": "Abonnieren"
     },
     "search": {
-      "view_more": "Alle Ergebnisse für \"{{ terms }}\" anzeigen",
-      "products": "Produkte",
-      "suggestions": "Vorschläge",
-      "collections": "Kollektionen",
-      "pages": "Seiten",
-      "articles": "Artikel",
-      "no_results_html": "Suche nach \"{{ terms }}\"",
+      "view_more": "Mehr sehen",
+      "collections": "Kollektionen:",
+      "pages": "Seiten:",
+      "articles": "Artikel:",
+      "no_results_html": "Ihre Suche nach \"{{ terms }}\" hat keine Ergebnisse hervorgebracht.",
       "results_for_html": "Ihre Suche nach \"{{ terms }}\" hat folgende Ergebnisse hervorgebracht:",
       "title": "Suche",
-      "placeholder": "Suchen",
+      "placeholder": "Durchsuchen Sie unseren Shop",
       "submit": "Suchen",
-      "cancel": "Abbrechen",
-      "search_title": "Top gesucht",
       "result_count": {
         "one": "{{ count }} Ergebnis",
         "other": "{{ count }} Ergebnisse"
@@ -142,8 +138,7 @@
       "increase_quantity": "Artikelmenge um eins erhöhen",
       "terms": "Ich stimme den Nutzungsbedingungen zu",
       "terms_html": "Ich stimme den <a href='{{ url }}' target='_blank'>Nutzungsbedingungen</a> zu",
-      "terms_confirm": "Sie müssen den Verkaufsbedingungen zustimmen, um auszuchecken",
-      "max_quantity": "Du kannst nur haben {{ quantity }} von {{ title }} in Ihrem Warenkorbt."
+      "terms_confirm": "Sie müssen den Verkaufsbedingungen zustimmen, um auszuchecken"
     },
     "label": {
       "quantity": "Menge",
@@ -327,7 +322,7 @@
       "shipping_policy_html": "zzgl. <a href='{{ link }}'>Versandkosten<\/a>",
       "will_not_ship_until": "Wird nach dem {{ date }} versendet",
       "will_be_in_stock_after": "Wird nach dem {{ date }} auf Lager sein",
-      "waiting_for_stock": "Nachbestellt, bald verfügbar",
+      "waiting_for_stock": "Inventar auf dem Weg",
       "view_in_space": "In Ihrem Bereich ansehen",
       "view_in_space_label": "„Ansicht in Ihrem Raum“ lädt den Artikel im Augmented-Reality-Fenster"
     }
@@ -353,19 +348,6 @@
       "shop_link": "Einkauf beginnen",
       "print": "Drucken",
       "add_to_apple_wallet": "Hinzufügen zu Apple Wallet"
-    }
-  },
-  "recipient": {
-    "form": {
-      "checkbox": "Ich möchte dies als Geschenk senden",
-      "email_label": "Empfänger E-Mail",
-      "email": "E-Mail",
-      "name_label": "Name des Empfängers (optional)",
-      "name": "Name",
-      "message_label": "Nachricht (optional)",
-      "message": "Nachricht",
-      "max_characters": "Maximal {{ max_chars }} Zeichen",
-      "send_on_label": "Senden an (optional)"
     }
   },
   "date_formats":{

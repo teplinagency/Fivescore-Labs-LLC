@@ -44,11 +44,11 @@
     },
     "social": {
       "share_on_facebook": "Compartir",
-      "share_on_x": "Compartir",
+      "share_on_twitter": "Tuitear",
       "share_on_pinterest": "Hacer pin",
       "alt_text": {
         "share_on_facebook": "Compartir en Facebook",
-        "share_on_x": "Tuitear en X",
+        "share_on_twitter": "Tuitear en Twitter",
         "share_on_pinterest": "Pinear en Pinterest"
       }
     },
@@ -58,19 +58,15 @@
       "submit": "Suscribir"
     },
     "search": {
-      "view_more": "Mostrar todos los resultados para \"{{ terms }}\"",
-      "products": "Productos",
-      "suggestions": "Sugerencias",
-      "collections": "Colecciones",
-      "pages": "Páginas",
-      "articles": "Artículos",
-      "no_results_html": "Búsqueda de \"{{ terms }}\"",
+      "view_more": "Ver más",
+      "collections": "Colecciones:",
+      "pages": "Páginas:",
+      "articles": "Artículos:",
+      "no_results_html": "Su búsqueda de \"{{ terms }}\" no tuvo resultados.",
       "results_for_html": "Su búsqueda de \"{{ terms }}\" muestra lo siguiente:",
       "title": "Buscar",
-      "placeholder": "Buscar",
+      "placeholder": "buscar en nuestra tienda",
       "submit": "Buscar",
-      "cancel": "Cancelar",
-      "search_title": "Más buscadas",
       "result_count": {
         "one": "{{ count }} resultado",
         "other": "{{ count }} resultados"
@@ -142,8 +138,7 @@
       "increase_quantity": "Aumentar uno a la cantidad de artículos",
       "terms": "Acepto los términos y condiciones",
       "terms_html": "Acepto los <a href='{{ url }}' target='_blank'>términos y condiciones</a>",
-      "terms_confirm": "Debe aceptar los términos y condiciones de venta para pagar",
-      "max_quantity": "Solo puedes tener {{ quantity }} de {{ title }} en tu carrito."
+      "terms_confirm": "Debe aceptar los términos y condiciones de venta para pagar"
     },
     "label": {
       "quantity": "Cantidad",
@@ -327,7 +322,7 @@
       "shipping_policy_html": "Los <a href='{{ link }}'>gastos de envío<\/a> se calculan en la pantalla de pagos.",
       "will_not_ship_until": "Será enviado después {{ date }}",
       "will_be_in_stock_after": "Estará disponible después {{ date }}",
-      "waiting_for_stock": "Pedido pendiente, envío pronto",
+      "waiting_for_stock": "Inventario en el camino",
       "view_in_space": "Ver en tu espacio",
       "view_in_space_label": "Ver en tu espacio, carga el artículo en la ventana de realidad aumentada"
     }
@@ -353,19 +348,6 @@
       "shop_link": "Empezar a comprar",
       "print": "Imprimir",
       "add_to_apple_wallet": "Añadir a Apple Wallet"
-    }
-  },
-  "recipient": {
-    "form": {
-      "checkbox": "Quiero enviar esto como un regalo.",
-      "email_label": "Correo electrónico de la persona destinataria",
-      "email": "Correo electrónico",
-      "name_label": "Nombre de la persona destinataria (opcional)",
-      "name": "Nombre",
-      "message_label": "Mensaje (opcional)",
-      "message": "Mensaje",
-      "max_characters": "{{ max_chars }} caracteres máx.",
-      "send_on_label": "Enviar (opcional)"
     }
   },
   "date_formats":{

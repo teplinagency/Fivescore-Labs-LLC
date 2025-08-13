@@ -46,14 +46,17 @@
     <div
       class="countdown__content">
       {% if section.settings.background_image != blank %}
-        <div class="countdown__background-image-wrapper {% if section.settings.mobile_image != blank %}small--hide{% endif %}">
-          {% comment %} Full width image so don't need to adjust sizes attribute, fallback is 100vw {% endcomment %}
-          {%- render 'image-element',
-            img: section.settings.background_image,
-            img_width: 2400,
-            loading: section.settings.lazyload_images,
-            classes: 'countdown__background-image',
-          -%}
+        <div class="countdown__background-image-wrapper">
+          <div
+            class="countdown__background-image {% if section.settings.mobile_image != blank %}small--hide{% endif %}"
+            style="--countdown-background-image-position: {{ section.settings.focal_point }};"
+          >
+          </div>
+          {% style %}
+            #shopify-section-{{ section.id }} .countdown__background-image {
+              background-image: url({{ section.settings.background_image | image_url: width: '2400' }});
+            }
+          {% endstyle %}
           {% if section.settings.overlay_opacity > 0 %}
             {% assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0 %}
               <div
@@ -69,30 +72,28 @@
         </div>
       {% endif %}
       {% if section.settings.mobile_image != blank %}
-        <div class="countdown__mobile-image-wrapper">
-          {% comment %} Full width image so don't need to adjust sizes attribute, fallback is 100vw {% endcomment %}
-          {%- render 'image-element',
-            img: section.settings.mobile_image,
-            loading: section.settings.lazyload_images,
-            classes: 'countdown__mobile-image medium-up--hide',
-          -%}
-          {% if section.settings.overlay_opacity > 0 %}
-            {% assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0 %}
-              <div
-                class="countdown__overlay medium-up--hide"
-                style="
-                  --countdown-overlay-rgba: {{ section.settings.overlay_color  | color_modify: 'alpha', overlay_alpha }}
-                "
-              ></div>
-          {% endif %}
-        </div>
+        {%- assign img_url_mobile = section.settings.mobile_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <div class="countdown__mobile-image-wrapper">
+            <img class="countdown__mobile-image lazyload medium-up--hide"
+              src="{{ section.settings.mobile_image | img_url: '300x' }}"
+              data-src="{{ img_url_mobile }}"
+              data-aspectratio="{{ section.settings.mobile_image.aspect_ratio }}"
+              data-sizes="auto"
+              alt="{{ section.settings.mobile_image.alt | escape }}"
+              style="object-position: {{ section.settings.mobile_image_focal_point }}"
+            >
+            {% if section.settings.overlay_opacity > 0 %}
+              {% assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0 %}
+                <div
+                  class="countdown__overlay medium-up--hide"
+                  style="
+                    --countdown-overlay-rgba: {{ section.settings.overlay_color  | color_modify: 'alpha', overlay_alpha }}
+                  "
+                ></div>
+            {% endif %}
+          </div>
       {% endif %}
       {% for block in section.blocks %}
-        {% if block.type == '@app' %}
-          <div class="countdown__block countdown__block--{{ block.type }}" {{ block.shopify_attributes }}>
-            {%- render block -%}
-          </div>
-        {% endif %}
         {% if block.type == 'timer' %}
           <div class="countdown__block countdown__block--{{ block.type }}" {{ block.shopify_attributes }}>
             <countdown-timer
@@ -102,7 +103,7 @@
               data-hour="{{ block.settings.hour }}"
               data-minute="{{ block.settings.minute }}"
               data-hide-timer="{{ block.settings.hide_timer }}"
-              data-complete-message="{{ block.settings.text | escape }}"
+              data-complete-message="{{ block.settings.text }}"
             >
               <div class="countdown__display countdown__display--visible" data-time-display>
                 <div class="countdown__display-block">
@@ -239,17 +240,95 @@
       "label": "t:sections.countdown.settings.mobile_image.label"
     },
     {
-      "type": "checkbox",
-      "id": "lazyload_images",
-      "label": "t:common.lazyload_images.label",
-      "info": "t:common.lazyload_images.info",
-      "default": true
+      "type": "select",
+      "id": "focal_point",
+      "label": "t:sections.countdown.settings.focal_point.label",
+      "default": "center",
+      "options": [
+        {
+          "value": "20% 0",
+          "label": "t:sections.countdown.settings.focal_point.options.20_0.label"
+        },
+        {
+          "value": "top",
+          "label": "t:sections.countdown.settings.focal_point.options.top.label"
+        },
+        {
+          "value": "80% 0",
+          "label": "t:sections.countdown.settings.focal_point.options.80_0.label"
+        },
+        {
+          "value": "20% 50%",
+          "label": "t:sections.countdown.settings.focal_point.options.20_50.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.countdown.settings.focal_point.options.center.label"
+        },
+        {
+          "value": "80% 50%",
+          "label": "t:sections.countdown.settings.focal_point.options.80_50.label"
+        },
+        {
+          "value": "20% 100%",
+          "label": "t:sections.countdown.settings.focal_point.options.20_100.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.countdown.settings.focal_point.options.bottom.label"
+        },
+        {
+          "value": "80% 100%",
+          "label": "t:sections.countdown.settings.focal_point.options.80_100.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_focal_point",
+      "label": "t:sections.countdown.settings.mobile_image_focal_point.label",
+      "default": "top",
+      "options": [
+        {
+          "value": "20% 0",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.20_0.label"
+        },
+        {
+          "value": "top",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.top.label"
+        },
+        {
+          "value": "80% 0",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.80_0.label"
+        },
+        {
+          "value": "20% 50%",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.20_50.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.center.label"
+        },
+        {
+          "value": "80% 50%",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.80_50.label"
+        },
+        {
+          "value": "20% 100%",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.20_100.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.bottom.label"
+        },
+        {
+          "value": "80% 100%",
+          "label": "t:sections.countdown.settings.mobile_image_focal_point.options.80_100.label"
+        }
+      ]
     }
   ],
   "blocks": [
-    {
-      "type": "@app"
-    },
     {
       "type": "timer",
       "name": "t:sections.countdown.blocks.timer.name",
@@ -258,8 +337,16 @@
           "type": "select",
           "id": "year",
           "label": "t:sections.countdown.blocks.timer.settings.year.label",
-          "default": "2025",
+          "default": "2023",
           "options": [
+            {
+              "value": "2022",
+              "label": "2022"
+            },
+            {
+              "value": "2023",
+              "label": "2023"
+            },
             {
               "value": "2024",
               "label": "2024"
@@ -267,14 +354,6 @@
             {
               "value": "2025",
               "label": "2025"
-            },
-            {
-              "value": "2026",
-              "label": "2026"
-            },
-            {
-              "value": "2027",
-              "label": "2027"
             }
           ]
         },
@@ -945,9 +1024,6 @@
         }
       ]
     }
-  ],
-  "disabled_on": {
-    "groups": ["custom.popups"]
-  }
+  ]
 }
 {% endschema %}

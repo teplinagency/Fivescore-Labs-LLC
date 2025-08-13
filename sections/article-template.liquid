@@ -35,11 +35,16 @@
 
   {% if section.settings.blog_show_image and article.image %}
     <div class="image-wrap aos-animate article__featured-image" style="height: 0; padding-bottom: {{ 100 | divided_by: article.image.aspect_ratio }}%;">
-      {%- render 'image-element',
-        img: article.image,
-        widths: '360, 540, 750, 900, 1080, 1600',
-        sizeVariable: '1000px',
-      -%}
+      {%- assign img_url = article.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+      <img class="lazyload"
+          data-src="{{ img_url }}"
+          data-widths="[360, 540, 750, 900, 1080, 1600]"
+          data-aspectratio="{{ article.image.aspect_ratio }}"
+          data-sizes="auto"
+          alt="{{ article.image.alt }}">
+      <noscript>
+        <img class="lazyloaded" src="{{ article.image | img_url: '1000x' }}" alt="{{ block.settings.image.alt }}">
+      </noscript>
     </div>
   {% endif %}
 
@@ -109,16 +114,16 @@
             <div class="grid grid--small">
               <div class="grid__item medium-up--one-half">
                 <label for="CommentAuthor">{{ 'blogs.comments.name' | t }}</label>
-                <input required class="input-full{% if form.errors contains 'author' %} error{% endif %}" type="text" name="comment[author]" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words">
+                <input class="input-full{% if form.errors contains 'author' %} error{% endif %}" type="text" name="comment[author]" id="CommentAuthor" value="{{ form.author }}" autocapitalize="words">
               </div>
               <div class="grid__item medium-up--one-half">
                 <label for="CommentEmail">{{ 'blogs.comments.email' | t }}</label>
-                <input required class="input-full{% if form.errors contains 'email' %} error{% endif %}" type="email" name="comment[email]" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                <input class="input-full{% if form.errors contains 'email' %} error{% endif %}" type="email" name="comment[email]" id="CommentEmail" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
               </div>
             </div>
 
             <label for="CommentBody">{{ 'blogs.comments.message' | t }}</label>
-            <textarea required class="input-full{% if form.errors contains 'body' %} error{% endif %}" name="comment[body]" id="CommentBody">{{ form.body }}</textarea>
+            <textarea class="input-full{% if form.errors contains 'body' %} error{% endif %}" name="comment[body]" id="CommentBody">{{ form.body }}</textarea>
 
             {% if blog.moderated? %}
               <p><small>{{ 'blogs.comments.moderated' | t }}</small></p>
@@ -145,7 +150,7 @@
   <hr class="hr--large">
 
   <div class="text-center">
-    <a href="{{ blog.url }}" class="return-link"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-arrow-left" viewBox="0 0 50 15"><title>icon-left-arrow</title><path d="M50 5.38v4.25H15V15L0 7.5 15 0v5.38Z"/></svg> {{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
+    <a href="{{ blog.url }}" class="return-link"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-arrow-left" viewBox="0 0 50 15"><path d="M50 5.38v4.25H15V15L0 7.5 15 0v5.38z"/></svg> {{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
   </div>
 </article>
 
@@ -230,9 +235,6 @@
       "label": "t:sections.article-template.settings.social_sharing_blog.label",
       "default": true
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}

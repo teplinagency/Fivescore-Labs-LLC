@@ -9,7 +9,9 @@
 
 <ul
   class="site-nav site-navigation medium-down--hide"
->
+  {% unless disable_aria %}
+    role="navigation" aria-label="Primary"
+  {% endunless %}>
   {%- for link in main_menu.links limit: limit offset: offset -%}
     {%- liquid
       assign has_dropdown = false
@@ -37,34 +39,16 @@
       endif
     -%}
 
-    <li class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless %}">
+    <li
+      class="site-nav__item site-nav__expanded-item{% if has_dropdown %} site-nav--has-dropdown{% endif %}{% if is_megamenu %} site-nav--is-megamenu{% endif %}{% unless template == 'index' %}{% if link.active %} site-nav--active{% endif %}{% endunless %}"
+      {% if has_dropdown %}aria-haspopup="true"{% endif %}>
 
-      {% if is_megamenu or has_dropdown %}
-        <details
-          id="site-nav-item--{{ forloop.index }}"
-          class="site-nav__details"
-          data-hover="{{ hover_menu }}"
-        >
-          <summary
-            data-link="{{ link.url }}"
-            aria-expanded="false"
-            aria-controls="site-nav-item--{{ forloop.index }}"
-            class="site-nav__link site-nav__link--underline{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}"
-          >
-            {{ link.title }} <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg>
-          </summary>
-      {% else %}
-        <a
-          href="{{ link.url }}"
-          class="site-nav__link{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}"
-        >
-          {{ link.title }}
-          {%- if has_dropdown -%}
-            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg>
-          {%- endif -%}
-        </a>
-      {% endif %}
-
+      <a href="{{ link.url }}" class="site-nav__link{% if has_dropdown %} site-nav__link--has-dropdown{% endif %}">
+        {{ link.title }}
+        {%- if has_dropdown -%}
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="M1.57 1.59l12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none" fill-rule="evenodd"/></svg>
+        {%- endif -%}
+      </a>
 
       {%- if is_megamenu -%}
         {%- assign columns = 1 -%}
@@ -123,11 +107,13 @@
                   {%- endif -%}
                     <div style="margin: 0 auto; max-width: {{ promo_image_1.width }}px">
                       <div class="image-wrap aos-animate megamenu__promo-image" style="height: 0; padding-bottom: {{ 100 | divided_by: promo_image_1.aspect_ratio }}%;">
-                        {%- render 'image-element',
-                          img: promo_image_1,
-                          widths: '540, 750, 900',
-                          sizeVariable: '250px',
-                        -%}
+                        {%- assign img_url = promo_image_1 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                            data-src="{{ img_url }}"
+                            data-widths="[540, 750, 900]"
+                            data-aspectratio="{{ promo_image_1.aspect_ratio }}"
+                            data-sizes="auto"
+                            alt="{{ promo_image_1.alt }}">
                       </div>
                     </div>
                     {%- if promo_heading_1 -%}
@@ -149,11 +135,13 @@
                   {%- endif -%}
                     <div style="margin: 0 auto; max-width: {{ promo_image_2.width }}px">
                       <div class="image-wrap aos-animate megamenu__promo-image" style="height: 0; padding-bottom: {{ 100 | divided_by: promo_image_2.aspect_ratio }}%;">
-                        {%- render 'image-element',
-                          img: promo_image_2,
-                          widths: '540, 750, 900',
-                          sizeVariable: '250px',
-                        -%}
+                        {%- assign img_url = promo_image_2 | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                        <img class="lazyload"
+                            data-src="{{ img_url }}"
+                            data-widths="[540, 750, 900]"
+                            data-aspectratio="{{ promo_image_2.aspect_ratio }}"
+                            data-sizes="auto"
+                            alt="{{ promo_image_2.alt }}">
                       </div>
                     </div>
                     {%- if promo_heading_2 -%}
@@ -181,29 +169,12 @@
             -%}
 
             <li class="{% if childlink.active %}site-nav--active{% endif %}{% if has_sub_dropdown %} site-nav__deep-dropdown-trigger{% endif %}">
-              {% if has_sub_dropdown %}
-                <details
-                  id="site-nav-deep-item--{{ forloop.index }}"
-                  class="site-nav__details"
-                  data-hover="{{ hover_menu }}"
-                >
-                  <summary
-                    data-link="{{ childlink.url }}"
-                    aria-expanded="false"
-                    aria-controls="site-nav-deep-item--{{ forloop.index }}"
-                    class="site-nav__dropdown-link site-nav__dropdown-link--second-level{% if has_sub_dropdown %} site-nav__dropdown-link--has-children{% endif %}"
-                  >
-                    {{ childlink.title | escape }}
-                    {%- if has_sub_dropdown -%}
-                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg>
-                    {%- endif -%}
-                  </summary>
-              {% else %}
-                <a href="{{ childlink.url }}" class="site-nav__dropdown-link site-nav__dropdown-link--second-level">
-                  {{ childlink.title | escape }}
-                </a>
-              {% endif %}
-
+              <a href="{{ childlink.url }}" class="site-nav__dropdown-link site-nav__dropdown-link--second-level{% if has_sub_dropdown %} site-nav__dropdown-link--has-children{% endif %}">
+                {{ childlink.title | escape }}
+                {%- if has_sub_dropdown -%}
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="M1.57 1.59l12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none" fill-rule="evenodd"/></svg>
+                {%- endif -%}
+              </a>
               {%- if has_sub_dropdown -%}
                 <ul class="site-nav__deep-dropdown">
                   {%- for grandchildlink in childlink.links -%}
@@ -213,18 +184,10 @@
                   {%- endfor -%}
                 </ul>
               {%- endif -%}
-
-              {% if has_sub_dropdown %}
-                </details>
-              {% endif %}
             </li>
           {%- endfor -%}
         </ul>
       {%- endif -%}
-
-      {% if is_megamenu or has_dropdown %}
-        </details>
-      {% endif %}
     </li>
   {%- endfor -%}
 </ul>

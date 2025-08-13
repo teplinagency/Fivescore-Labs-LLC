@@ -106,11 +106,7 @@
               <div class="animation-cropper">
                 <div class="animation-contents">
                   <a href="{{ link_href }}" class="btn btn--inverse{% if youtube_video_link %} btn--no-animate{% endif %}"
-                    {%- if section.settings.link contains 'vimeo.com' -%}
-                      {%- assign video_id = section.settings.link | split: '.com/' -%}
-                      {%- assign video_id = video_id[1] | split: '/' | first -%}
-                      data-video-id="{{ video_id }}"
-                    {%- elsif section.settings.video_url contains 'vimeo.com' -%}
+                    {%- if section.settings.video_url contains 'vimeo.com' -%}
                       data-video-id="{{ video_id }}"
                     {%- endif -%}
                   >
@@ -288,9 +284,6 @@
     {
       "name": "t:sections.hero-video.presets.video_hero.name"
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}

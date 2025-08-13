@@ -1,4 +1,9 @@
 {%- liquid
+  assign fixed_aspect_ratio = false
+  unless section.settings.image_size == 'natural'
+    assign fixed_aspect_ratio = true
+  endunless
+
   assign show_section = true
   if template == 'index' and section.settings.hide_homepage
     assign show_section = false
@@ -24,23 +29,44 @@
                   <div style="{% if section.settings.align_text == 'center' %}margin: 0 auto;{% endif %} max-width: {{ block.settings.image_width }}px;">
                     <a href="{{ block.settings.button_link }}" class="article__grid-image" aria-label="{{ block.settings.title }}">
                       {%- if block.settings.image != blank -%}
-                        <div class="image-wrap {% if block.settings.image_mask != 'none' %}svg-mask svg-mask--{{ block.settings.image_mask }}{% endif %}" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
-                          {%- render 'image-element',
-                            img: block.settings.image,
-                            widths: '180, 360, 540, 720, 900, 1080',
-                            sizeVariable: grid_item_width,
-                          -%}
-                        </div>
+                        {%- if fixed_aspect_ratio -%}
+                          <div class="image-wrap">
+                            <div
+                              class="grid__image-ratio grid__image-ratio--{{ section.settings.image_size }}">
+                              {% assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                              <img class="lazyload grid__image-cover"
+                                  data-src="{{ img_url }}"
+                                  data-widths="[360, 540, 720, 900]"
+                                  data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                                  data-sizes="auto"
+                                  alt="{{ block.settings.image.alt | escape }}">
+                            </div>
+                            <noscript>
+                              <img class="lazyloaded" src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.title | escape }}">
+                            </noscript>
+                          </div>
+                        {%- else -%}
+                          <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
+                            {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                            <img class="lazyload"
+                                data-src="{{ img_url }}"
+                                data-widths="[180, 360, 540, 720, 900, 1080]"
+                                data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                                data-sizes="auto"
+                                alt="{{ block.settings.image.alt | escape }}">
+                            <noscript>
+                              <img class="lazyloaded" src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.title | escape }}">
+                            </noscript>
+                          </div>
+                        {%- endif -%}
                       {%- else -%}
-                        <div class="image-wrap {% if block.settings.image_mask != 'none' %}svg-mask svg-mask--{{ block.settings.image_mask }}{% endif %}">
-                          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                        </div>
+                        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
                       {%- endif -%}
                     </a>
                   </div>
                 {%- endif -%}
                 {%- if block.settings.title != blank -%}
-                  <h2 class="h4">{{ block.settings.title }}</h2>
+                  <div class="h4">{{ block.settings.title }}</div>
                 {%- endif -%}
                 {%- if block.settings.text != blank -%}
                   <div class="rte-setting text-spacing">{{ block.settings.text }}</div>
@@ -69,6 +95,34 @@
       "type": "checkbox",
       "id": "hide_homepage",
       "label": "t:sections.footer-promotions.settings.hide_homepage.label"
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "label": "t:sections.footer-promotions.settings.image_size.label",
+      "default": "wide",
+      "options": [
+        {
+          "value": "natural",
+          "label": "t:sections.footer-promotions.settings.image_size.options.natural.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.footer-promotions.settings.image_size.options.square.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.footer-promotions.settings.image_size.options.landscape.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.footer-promotions.settings.image_size.options.portrait.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.footer-promotions.settings.image_size.options.wide.label"
+        }
+      ]
     },
     {
       "type": "select",
@@ -102,62 +156,6 @@
           "type": "image_picker",
           "id": "image",
           "label": "t:sections.footer-promotions.blocks.column.settings.image.label"
-        },
-        {
-          "type": "select",
-          "id": "image_mask",
-          "label": "t:common.image_mask.label",
-          "default": "none",
-          "options": [
-            {
-              "value": "none",
-              "label": "t:common.image_mask.options.none.label"
-            },
-            {
-              "value": "portrait",
-              "label": "t:common.image_mask.options.portrait.label"
-            },
-            {
-              "value": "landscape",
-              "label": "t:common.image_mask.options.landscape.label"
-            },
-            {
-              "value": "square",
-              "label": "t:common.image_mask.options.square.label"
-            },
-            {
-              "value": "rounded",
-              "label": "t:common.image_mask.options.rounded.label"
-            },
-            {
-              "value": "rounded-wave",
-              "label": "t:common.image_mask.options.rounded-wave.label"
-            },
-            {
-              "value": "rounded-top",
-              "label": "t:common.image_mask.options.rounded-top.label"
-            },
-            {
-              "value": "star",
-              "label": "t:common.image_mask.options.star.label"
-            },
-            {
-              "value": "splat-1",
-              "label": "t:common.image_mask.options.splat-1.label"
-            },
-            {
-              "value": "splat-2",
-              "label": "t:common.image_mask.options.splat-2.label"
-            },
-            {
-              "value": "splat-3",
-              "label": "t:common.image_mask.options.splat-3.label"
-            },
-            {
-              "value": "splat-4",
-              "label": "t:common.image_mask.options.splat-4.label"
-            }
-          ]
         },
         {
           "type": "range",

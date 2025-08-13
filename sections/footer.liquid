@@ -53,10 +53,6 @@
           <div {{ block.shopify_attributes }} class="grid__item footer__item--{{ block.id }}">
             {%- render 'footer-menu', block: block -%}
           </div>
-        {%- when 'follow_shop_cta' -%}
-          <div {{ block.shopify_attributes }} class="grid__item footer__item--{{ block.id }}">
-            {%- render 'follow-shop-cta', block: block -%}
-          </div>
         {%- endcase -%}
       {%- endfor -%}
     </div>
@@ -73,7 +69,7 @@
               <div id="FooterLocale" class="disclosure">
                 <button type="button" class="faux-select disclosure__toggle" aria-expanded="false" aria-controls="LangList" aria-describedby="LangHeading" data-disclosure-toggle>
                   {{ form.current_locale.endonym_name | capitalize }}
-                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg>
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="M1.57 1.59l12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none" fill-rule="evenodd"/></svg>
                 </button>
                 <ul id="LangList" class="disclosure-list" data-disclosure-list>
                   {%- for locale in form.available_locales -%}
@@ -103,7 +99,7 @@
                   <span class="currency-options__label currency-options__label--inline">
                     {{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
                   </span>
-                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="m1.57 1.59 12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none"/></svg>
+                  <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-chevron-down" viewBox="0 0 28 16"><path d="M1.57 1.59l12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none" fill-rule="evenodd"/></svg>
                 </button>
                 <ul id="CurrencyList" class="disclosure-list" data-disclosure-list>
                   {%- for country in localization.available_countries-%}
@@ -126,7 +122,7 @@
         {%- endform -%}
       {%- endif -%}
 
-      {%- if section.settings.show_payment_icons -%}
+<!--       {%- if section.settings.show_payment_icons -%}
         {%- unless shop.enabled_payment_types == empty -%}
           <ul class="inline-list payment-icons site-footer__bottom-block{% unless section.settings.colorize_payment_icons %} payment-icons--greyscale{% endunless %} text-center">
             {%- for type in shop.enabled_payment_types -%}
@@ -136,7 +132,9 @@
             {%- endfor -%}
           </ul>
         {%- endunless -%}
-      {%- endif -%}
+      {%- endif -%} -->
+      
+
 
       <div class="footer__copyright site-footer__bottom-block">
         {%- if section.settings.show_copyright -%}
@@ -147,7 +145,14 @@
             {%- endif -%}
           </span>
         {%- endif -%}
-        <span class="footer__powered_by">{{ powered_by_link }}</span>
+
+              {%- if section.settings.show_payment_icons -%}
+          <ul class="inline-list payment-icons site-footer__bottom-block{% unless section.settings.colorize_payment_icons %} payment-icons--greyscale{% endunless %} text-center">
+            <li class="icon--payment"><img src="https://cdn.shopify.com/s/files/1/0724/4588/6752/files/visa.svg?v=1685641057"></li>
+            <li class="icon--payment"><img src="https://cdn.shopify.com/s/files/1/0724/4588/6752/files/mastercard.svg?v=1685641058"></li>         
+          </ul>
+       
+      {%- endif -%}
       </div>
     </div>
 
@@ -342,26 +347,6 @@
           "label": "t:sections.footer.blocks.custom_text.settings.container_width.label",
           "default": 20,
           "min": 15,
-          "max": 95,
-          "unit": "%"
-        }
-      ]
-    },
-    {
-      "type": "follow_shop_cta",
-      "name": "t:common.follow_shop_cta.name",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "t:common.follow_shop_cta.paragraph.content"
-        },
-        {
-          "type": "range",
-          "id": "container_width",
-          "label": "t:sections.footer.blocks.custom_text.settings.container_width.label",
-          "default": 20,
-          "min": 20,
           "max": 95,
           "unit": "%"
         }

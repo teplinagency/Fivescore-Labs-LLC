@@ -1,25 +1,12 @@
-{% form 'product', product, id: form_id, class: 'product-single__form' %}
-  {%- liquid
-    assign gift_card_recipient_feature_active = false
-    if block.settings.show_gift_card_recipient and product.gift_card?
-      assign gift_card_recipient_feature_active = true
-    endif
+{% form 'product', product, data-productid: product.id, id: form_id, class: 'product-single__form' %}
+  {%- assign enable_dynamic_buttons = false -%}
+  {% if show_dynamic_checkout and template != 'product.preorder' %}
+    {%- assign enable_dynamic_buttons = true -%}
+  {% endif %}
 
-    assign enable_dynamic_buttons = false
-    if show_dynamic_checkout and gift_card_recipient_feature_active == false
-      unless template contains 'preorder'
-        assign enable_dynamic_buttons = true
-      endunless
-    endif
-  -%}
-
-  {%- if gift_card_recipient_feature_active -%}
-    {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
-  {%- endif -%}
-
-  {%- if enable_dynamic_buttons -%}
+  {% if enable_dynamic_buttons %}
     <div class="payment-buttons">
-  {%- endif -%}
+  {% endif %}
 
     {%- liquid
       assign default_text = 'products.product.add_to_cart' | t
@@ -54,7 +41,7 @@
 
   <div class="shopify-payment-terms product__policies">{{ form | payment_terms }}</div>
 
-  <select name="id" data-product-select class="product-single__variants no-js">
+  <select name="id" data-productid="{{ product.id }}" data-product-select class="product-single__variants no-js">
     {%- for variant in product.variants -%}
       {% if variant.available %}
         <option {% if variant == product.selected_or_first_available_variant %}

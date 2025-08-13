@@ -17,7 +17,7 @@
   {% endif %}
   data-cart-subtotal="{{ cart.total_price }}">
   {% for item in cart.items %}
-    {%- render 'cart-item', product: item, sizeVariable: '90px', fallback: '60px', -%}
+    {%- render 'cart-item', product: item -%}
   {% endfor %}
 </div>
 <div class="cart__discounts{% if cart.cart_level_discount_applications == blank %} hide{% endif %}">

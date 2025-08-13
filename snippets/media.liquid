@@ -4,10 +4,6 @@
   Accepts:
   - media: {Object} Media Liquid object (required)
   - featured_media: {Object} Media Liquid object (required) - featured media of a given product or variant
-  - loading {String}
-  - sizes
-  - sizeVariable
-  - fallback
 {% endcomment %}
 
 {%- liquid
@@ -79,37 +75,38 @@
         {{ media | model_viewer_tag: image_size: product_zoom_size, reveal: 'interaction', toggleable: true, data-model-id: media.id }}
       </div>
       <button class="hide btn btn--circle btn--static product-single__close-media">
-        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><title>icon-X</title><path d="m19 17.61 27.12 27.13m0-27.12L19 44.74"/></svg>
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
       </button>
     {%- else -%}
       {%- if has_video and video_style == 'unmuted' -%}
         {%- assign media_aspect_ratio = media.preview_image.aspect_ratio -%}
       {%- endif -%}
       <div class="image-wrap{% if has_video and video_modal == false %} hide{% endif %}" style="height: 0; padding-bottom: {{ 100 | divided_by: media_aspect_ratio }}%;">
-        {%- capture image_classes -%}
-          {% if product_zoom_enable %}photoswipe__image{% endif %}
-        {%- endcapture -%}
-
-        {%- render 'image-element',
-          img: media.preview_image,
-          type: 'photoswipe',
-          classes: image_classes,
-          alt: media.alt | escape | split: '#' | first,
-          widths: '360, 540, 720, 900, 1080',
-          product_zoom_size: product_zoom_size,
-          loopIndex: loopIndex,
-          media: media,
-          media_width: media_width,
-          media_height: media_height,
-          sizes: sizes,
-          sizeVariable: sizeVariable,
-          fallback: fallback,
-          loading: loading,
+        {%- liquid
+          assign img_url = media | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
+          assign zoom_img_url = media.preview_image | img_url: product_zoom_size
         -%}
+
+        <img class="{% if product_zoom_enable %}photoswipe__image{% endif %} lazyload"
+          data-photoswipe-src="{{ zoom_img_url }}"
+          data-photoswipe-width="{{ media_width }}"
+          data-photoswipe-height="{{ media_height }}"
+          data-index="{{ loopIndex }}"
+          data-src="{{ img_url }}"
+          data-widths="[360, 540, 720, 900, 1080]"
+          data-aspectratio="{{ media_aspect_ratio }}"
+          data-sizes="auto"
+          alt="{{ media.alt | escape | split: '#' | first }}">
+
+        <noscript>
+          <img class="lazyloaded"
+            src="{{ media | img_url: '1400x' }}"
+            alt="{{ media.alt | escape }}">
+        </noscript>
 
         {%- if product_zoom_enable and media.media_type == 'image' -%}
           <button type="button" class="btn btn--no-animate btn--body btn--circle js-photoswipe__zoom product__photo-zoom">
-            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><title>icon-search</title><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58ZM54 54 41.94 42"/></svg>
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-search" viewBox="0 0 64 64"><path d="M47.16 28.58A18.58 18.58 0 1 1 28.58 10a18.58 18.58 0 0 1 18.58 18.58zM54 54L41.94 42"/></svg>
             <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t }}</span>
           </button>
         {%- endif -%}

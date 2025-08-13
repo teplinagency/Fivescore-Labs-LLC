@@ -1,4 +1,4 @@
-{% unless section.settings.disable_for_account_holders and customer %}
+{% unless section.settings.mode == blank or section.settings.disable_for_account_holders and customer %}
 
 {% for block in section.blocks %}
   {% if block.type == 'header' %}
@@ -15,21 +15,20 @@
   data-has-reminder="{{ has_reminder }}"
   data-delay-seconds="{{ section.settings.popup_seconds }}"
   {% if section.settings.popup_image != blank %}data-has-image{% endif %}
-  data-test-mode="{{ request.design_mode }}">
+  data-test-mode="{{ request.design_mode }}"
+  data-enabled="{{ section.settings.mode }}">
   <div class="modal__inner">
     <div class="modal__centered medium-up--text-center">
       <div class="modal__centered-content {% if section.settings.popup_image != blank %}newsletter--has-image{% endif %}">
 
         <div class="newsletter newsletter-popup {% if section.settings.image_position == 'right' %}newsletter-popup--image-reversed{% endif %}">
           {% if section.settings.popup_image != blank %}
-            <div class="newsletter-popup__image-wrapper">
-              {%- render 'image-element',
-                img: section.settings.popup_image,
-                img_width: 1000,
-                sizeVariable: '400px',
-                classes: 'newsletter-popup__image',
-              -%}
-            </div>
+            <div class="newsletter-popup__image"></div>
+            {% style %}
+              .newsletter-popup__image {
+                background-image: url({{ section.settings.popup_image | img_url: '1000x' }});
+              }
+            {% endstyle %}
           {% endif %}
 
           <div class="newsletter-popup__content">
@@ -51,7 +50,12 @@
 
             {% if section.settings.button_label != blank %}
               <a href="{{ section.settings.button_link }}" class="btn newsletter-button">
-                {{ section.settings.button_label }}
+                <div class="button--text">
+                  {{ section.settings.button_label }}
+                  <span class="button-arrow">
+                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon--wide icon-arrow-right" viewBox="0 0 50 15"><path d="M0 9.63V5.38h35V0l15 7.5L35 15V9.63z"/></svg>
+                  </span>
+                </div>
               </a>
             {% endif %}
 
@@ -63,7 +67,7 @@
       </div>
 
       <button type="button" class="modal__close js-modal-close text-link">
-        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><title>icon-X</title><path d="m19 17.61 27.12 27.13m0-27.12L19 44.74"/></svg>
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64"><path d="M19 17.61l27.12 27.13m0-27.12L19 44.74"/></svg>
         <span class="icon__fallback-text">{{ 'general.accessibility.close_modal' | t | json }}</span>
       </button>
     </div>
@@ -87,6 +91,13 @@
     "max_blocks": 1,
     "class": "index-section--hidden",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "mode",
+        "label": "t:sections.newsletter-popup.settings.mode.label",
+        "default": false,
+        "info": "t:sections.newsletter-popup.settings.mode.info"
+      },
       {
         "type": "checkbox",
         "id": "disable_for_account_holders",

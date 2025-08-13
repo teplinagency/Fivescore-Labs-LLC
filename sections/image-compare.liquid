@@ -78,32 +78,7 @@
         {% if forloop.index == 1 %}<div class="comparison__draggable" data-draggable>{% endif %}
 
         {% if block.settings.image != blank %}
-          {%- capture image_classes -%}
-            comparison__image comparison__image--{{ forloop.index }} {% if block.settings.blur %}blur{% endif %}
-          {%- endcapture -%}
-          <div class="comparison__image-wrapper"
-            {{ block.shopify_attributes }}
-            {% if forloop.index == 1 %}data-primary-image{% else %}data-secondary-image{% endif %}
-          >
-            {% comment %}
-              Full width image so don't need to adjust sizes attribute, fallback is 100vw
-              We could provide sizes (ex. 50% of viewport) only if we were able to update
-              the image markup everytime the slider changed
-            {% endcomment %}
-            {%- liquid
-              if forloop.index == 1
-                assign loading = section.settings.lazyload_images
-              else
-                assign loading = true
-              endif
-            -%}
-            {%- render 'image-element',
-              img: block.settings.image,
-              img_width: 2000,
-              loading: loading,
-              classes: image_classes,
-            -%}
-          </div>
+          <img class="comparison__image comparison__image--{{ forloop.index}} {% if block.settings.blur %}blur{% endif %}" src="{{ block.settings.image | img_url: '2000x' }})" alt="{{ block.settings.image.alt }}" {% if forloop.index == 1 %}data-primary-image{% else %}data-secondary-image{% endif %} {{ block.shopify_attributes }}>
         {% else %}
           {{ 'image' | placeholder_svg_tag: 'placeholder-svg comparison__image' }}
         {% endif %}
@@ -111,8 +86,8 @@
         {% if forloop.index == 1 %}</div>{% endif %}
       {% endfor %}
       <button class="comparison__button" data-button>
-        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98"><title>icon-chevron-left</title><path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0Z"/></svg>
-        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><title>icon-chevron</title><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98Z"/></svg>
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-left" viewBox="0 0 284.49 498.98"><path d="M249.49 0a35 35 0 0 1 24.75 59.75L84.49 249.49l189.75 189.74a35.002 35.002 0 1 1-49.5 49.5L10.25 274.24a35 35 0 0 1 0-49.5L224.74 10.25A34.89 34.89 0 0 1 249.49 0z"/></svg>
+        <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"/></svg>
       </button>
     </image-compare>
   </div>
@@ -210,13 +185,6 @@
       "id": "color",
       "label": "t:sections.image-comparison.settings.color.label",
       "default": "#FFFFFF"
-    },
-    {
-      "type": "checkbox",
-      "id": "lazyload_images",
-      "label": "t:common.lazyload_images.label",
-      "info": "t:common.lazyload_images.info",
-      "default": true
     }
   ],
   "blocks": [
@@ -244,9 +212,6 @@
         }
       ]
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}

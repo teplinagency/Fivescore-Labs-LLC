@@ -18,17 +18,84 @@
         },
         "product_grid": {
           "type": "product_grid",
-          "settings": {}
+          "settings": {
+            "collection_subnav_style": "inline",
+            "per_row": 3,
+            "mobile_flush_grid": false
+          }
         }
       },
       "block_order": [
         "collection_description",
         "product_grid"
       ],
-      "settings": {}
+      "settings": {
+        "collection_image_enable": true,
+        "collection_image_height": 550,
+        "parallax": true,
+        "parallax_direction": "top",
+        "enable_sidebar": true,
+        "collapsed": true,
+        "enable_color_swatches": false,
+        "enable_sort": false
+      }
+    },
+    "638f927e-0030-4387-9d41-a1b0938a0c9d": {
+      "type": "featured-product",
+      "blocks": {
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-0": {
+          "type": "price",
+          "settings": {}
+        },
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-1": {
+          "type": "separator",
+          "settings": {}
+        },
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-2": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": false
+          }
+        },
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-3": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": true
+          }
+        },
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-4": {
+          "type": "description",
+          "settings": {
+            "is_tab": false
+          }
+        }
+      },
+      "block_order": [
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-0",
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-1",
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-2",
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-3",
+        "template--16818173116702__638f927e-0030-4387-9d41-a1b0938a0c9d-1676876794372c6d20-4"
+      ],
+      "settings": {
+        "featured_product": "nad-boosting-sirtuin-activating",
+        "divider": false,
+        "sku_enable": false,
+        "image_size": "medium",
+        "product_zoom_enable": true,
+        "thumbnail_position": "beside",
+        "thumbnail_arrows": false,
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
     }
   },
   "order": [
-    "main-collection"
+    "main-collection",
+    "638f927e-0030-4387-9d41-a1b0938a0c9d"
   ]
 }

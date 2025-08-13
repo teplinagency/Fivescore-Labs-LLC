@@ -18,11 +18,26 @@
   theme.strings.authError = {{ 'sections.map.auth_error_html' | t | json }};
 </script>
 
-<div class="map-section display-map--{{ display_map }} {% if bg_image != blank %}bg-image--true{% endif %}"
-  data-section-id="{{ section.id }}"
-  data-section-type="map"
-  data-aos="map-section__animation"
->
+{%- if bg_image.src != blank -%}
+  {%- unless display_map -%}
+    {%- style -%}
+      .map-{{ section.id }} {
+        background-size: cover;
+        background-position: center;
+        background-image: url("{{ bg_image | img_url: '1800x' }}");
+        background-position: {{ section.settings.background_image_position | default: 'center center' }};
+      }
+
+      @media only screen and (max-width: 750px) {
+        .map-{{ section.id }} {
+          padding-top: {{ 1 | divided_by: bg_image.aspect_ratio | times: 100 }}%;
+        }
+      }
+    {%- endstyle -%}
+  {%- endunless -%}
+{% endif %}
+
+<div class="map-section" data-section-id="{{ section.id }}" data-section-type="map" data-aos="map-section__animation">
   {%- if section.settings.title != blank or section.settings.address != blank -%}
     <div class="page-width">
       <div class="map-section__overlay-wrapper">
@@ -55,25 +70,7 @@
     data-map
     class="map-section__container map-{{ section.id }}"
     data-address-setting="{{ section.settings.map_address | escape }}"
-    data-api-key="{{ section.settings.api_key }}">
-    {%- if bg_image.src != blank -%}
-      {%- unless display_map -%}
-        {% comment %} Full width image so don't need to adjust sizes attribute, fallback is 100vw {% endcomment %}
-        {%- render 'image-element',
-          img: bg_image,
-          img_width: 1800,
-          loading: section.settings.lazyload_images,
-        -%}
-        {%- style -%}
-          @media only screen and (max-width: 750px) {
-            .map-{{ section.id }} {
-              padding-top: {{ 1 | divided_by: bg_image.aspect_ratio | times: 100 }}%;
-            }
-          }
-        {%- endstyle -%}
-      {%- endunless -%}
-    {% endif %}
-  </div>
+    data-api-key="{{ section.settings.api_key }}"></div>
 </div>
 
 {% schema %}
@@ -119,20 +116,55 @@
       "info": "t:sections.map.settings.background_image.info"
     },
     {
-      "type": "checkbox",
-      "id": "lazyload_images",
-      "label": "t:common.lazyload_images.label",
-      "info": "t:common.lazyload_images.info",
-      "default": true
+      "type": "select",
+      "id": "background_image_position",
+      "label": "t:sections.map.settings.background_image_position.label",
+      "default": "center center",
+      "options": [
+        {
+          "label": "t:sections.map.settings.background_image_position.options.top_left.label",
+          "value": "top left"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.top_center.label",
+          "value": "top center"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.top_right.label",
+          "value": "top right"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.center_left.label",
+          "value": "center left"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.center_center.label",
+          "value": "center center"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.center_right.label",
+          "value": "center right"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.bottom_left.label",
+          "value": "bottom left"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.bottom_center.label",
+          "value": "bottom center"
+        },
+        {
+          "label": "t:sections.map.settings.background_image_position.options.bottom_right.label",
+          "value": "bottom right"
+        }
+      ],
+      "info": "t:sections.map.settings.background_image_position.info"
     }
   ],
   "presets": [
     {
       "name": "t:sections.map.presets.map.name"
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}

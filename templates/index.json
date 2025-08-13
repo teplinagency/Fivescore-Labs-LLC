@@ -12,170 +12,560 @@
     "hero-video": {
       "type": "hero-video",
       "settings": {
-        "title": "Bring your\nbrand to life.",
-        "title_size": 80,
-        "subheading": "",
-        "link_text": "Watch",
-        "link": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "section_height": "650px"
+        "title": "Fivescore Labs",
+        "title_size": 61,
+        "subheading": "The cleanest 3rd party lab tested supplements to support your balanced longevity regimen",
+        "link_text": "Shop Now",
+        "link": "shopify://collections/all",
+        "text_align": "vertical-center horizontal-center",
+        "video_url": "https://youtu.be/vopJ7g_L_Ww",
+        "overlay_opacity": 30,
+        "section_height": "100vh",
+        "mobile_height": "500px"
       }
     },
-    "featured-collection-switcher": {
-      "type": "featured-collection-switcher",
-      "settings": {}
+    "551db60b-4cfa-4e97-8ae6-934affcf70ef": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Always 3rd party lab tested. Never any nasty stuff.",
+        "home_featured_products": "frontpage",
+        "per_row": 3,
+        "rows": 2,
+        "view_all": false,
+        "divider": false
+      }
+    },
+    "996c429a-bef7-415c-adb2-d7409c763d72": {
+      "type": "slideshow",
+      "blocks": {
+        "template--16818173149470__996c429a-bef7-415c-adb2-d7409c763d72-16688460444f8ed72d-0": {
+          "type": "image",
+          "settings": {
+            "title": "",
+            "title_size": 50,
+            "subheading": "",
+            "link": "",
+            "link_text": "",
+            "text_align": "vertical-center horizontal-center",
+            "image": "shopify://shop_images/pexels-oziel-gA_CC_83_C2_B3mez-868097.jpg",
+            "image_mobile": "shopify://shop_images/pexels-oziel-gA_CC_83_C2_B3mez-868097.jpg",
+            "parallax_direction": "top",
+            "overlay_opacity": 42,
+            "focal_point": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "template--16818173149470__996c429a-bef7-415c-adb2-d7409c763d72-16688460444f8ed72d-0"
+      ],
+      "settings": {
+        "section_height": "550px",
+        "mobile_height": "250px",
+        "parallax": true,
+        "style": "arrows",
+        "autoplay": false,
+        "autoplay_speed": 5
+      }
+    },
+    "5dbdfc58-62c8-4ddb-8122-31d8d7a53c6c": {
+      "type": "rich-text",
+      "blocks": {
+        "template--16818173149470__5dbdfc58-62c8-4ddb-8122-31d8d7a53c6c-1669296291e568af6a-0": {
+          "type": "heading",
+          "settings": {
+            "title": "The human body is estimated to have over 37 trillion cells."
+          }
+        },
+        "template--16818173149470__5dbdfc58-62c8-4ddb-8122-31d8d7a53c6c-1669296291e568af6a-1": {
+          "type": "text",
+          "settings": {
+            "enlarge_text": false,
+            "text": "<p>Your cells form the foundational building blocks of overall health. They work tirelessly every day to keep you robust. Maintaining cellular health doesn’t just revitalize a single part or function of your body — it nourishes every cell from head to toe, reinforcing all of you at a foundational level.</p><p>When approached holistically alongside a varied diet, regular exercise, quality sleep and time restricted feeding, scientists believe that supplementing with evidence informed compounds can help support cellular health over the course of our lives.</p><p>At Fivescore Labs, we are on a mission to deliver the cleanest, independently tested formulations to help support your longevity regimen. Your cells go to battle with the forces of aging every single day and it is about time reinforcements were sent in to help.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16818173149470__5dbdfc58-62c8-4ddb-8122-31d8d7a53c6c-1669296291e568af6a-0",
+        "template--16818173149470__5dbdfc58-62c8-4ddb-8122-31d8d7a53c6c-1669296291e568af6a-1"
+      ],
+      "custom_css": [],
+      "settings": {
+        "align_text": "center",
+        "narrow_column": true,
+        "divider": false
+      }
+    },
+    "a6153d01-9659-4547-b065-808c18cb1b2f": {
+      "type": "text-and-image",
+      "settings": {
+        "image": "shopify://shop_images/red-and-blue-shoreline-iphone-screen.jpg",
+        "image_width": 350,
+        "subtitle": "Fivescore Labs",
+        "title": "Vision & Core Values",
+        "text": "<p>We are the region's first longevity consumer brand that is co-founded by scientists with a vision to deliver exceptional formulas to support your lifespan and healthspan goals. Our formulations are manufactured at best-in-class GMP certified facilities in the UK and are always independently tested at accredited labs in California to ensure purity. Our belief is that the science of human healthspan and lifespan should be accessible to all. We live by an unwavering commitment to deliver on our core values of transparency, scientific rigour and outstanding product quality.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "align_text": "left",
+        "layout": "right",
+        "divider": false
+      }
+    },
+    "a4ef14da-f9c9-4e3b-b708-a19be145f5ef": {
+      "type": "featured-product",
+      "blocks": {
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-price-1": {
+          "type": "price",
+          "settings": {}
+        },
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-separator-1": {
+          "type": "separator",
+          "settings": {}
+        },
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-variant_picker-1": {
+          "type": "variant_picker",
+          "settings": {
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": false
+          }
+        },
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-buy_buttons-1": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": true
+          }
+        }
+      },
+      "block_order": [
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-price-1",
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-separator-1",
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-variant_picker-1",
+        "template--18155518394656__a4ef14da-f9c9-4e3b-b708-a19be145f5ef-buy_buttons-1"
+      ],
+      "settings": {
+        "featured_product": "nad-boosting-sirtuin-activating",
+        "divider": false,
+        "sku_enable": false,
+        "image_size": "medium",
+        "product_zoom_enable": true,
+        "thumbnail_position": "beside",
+        "thumbnail_arrows": false,
+        "enable_video_looping": true,
+        "product_video_style": "muted"
+      }
+    },
+    "dcdbdbaa-6e34-4e85-9110-b5df9ebd69af": {
+      "type": "featured-logo",
+      "blocks": {
+        "fc11d1ee-e861-4dc8-af59-e24c47db9093": {
+          "type": "add_block",
+          "settings": {
+            "featured_logo": "shopify://shop_images/fast-company-logo-vector.png"
+          }
+        },
+        "b52bf48f-08f7-4265-ba09-b2650a127962": {
+          "type": "add_block",
+          "settings": {
+            "featured_logo": "shopify://shop_images/AlArabiya_English_2021_logo.jpg"
+          }
+        },
+        "19c616a2-2197-4b4b-ba4d-19e3fefde6de": {
+          "type": "add_block",
+          "settings": {
+            "featured_logo": "shopify://shop_images/zawya-logo-vector-01.png"
+          }
+        },
+        "352aa523-a244-4f5b-b0ec-60aaf0738abd": {
+          "type": "add_block",
+          "settings": {
+            "featured_logo": "shopify://shop_images/ethicalist_7547f6c9-ee83-47cd-a3cf-df45ecfa183f.svg"
+          }
+        },
+        "2ef6f5ba-c915-4678-a53d-605f1215345f": {
+          "type": "add_block",
+          "settings": {
+            "featured_logo": "shopify://shop_images/LiveHealthy_Logo_BlackCircle-_-1.svg"
+          }
+        }
+      },
+      "block_order": [
+        "fc11d1ee-e861-4dc8-af59-e24c47db9093",
+        "b52bf48f-08f7-4265-ba09-b2650a127962",
+        "19c616a2-2197-4b4b-ba4d-19e3fefde6de",
+        "352aa523-a244-4f5b-b0ec-60aaf0738abd",
+        "2ef6f5ba-c915-4678-a53d-605f1215345f"
+      ],
+      "settings": {
+        "featured_logo_sec_heading": "As Featured In"
+      }
+    },
+    "4eaeb667-4f40-4473-bd8b-765082183bbf": {
+      "type": "testimonials",
+      "blocks": {
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-0": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>“I love the fact that each batch is tested at a 3rd party lab. This is really important for me when I am trying to figure out which supplements to purchase online.”</p>",
+            "author": "Poppy",
+            "author_info": "London, UK"
+          }
+        },
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-1": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>“Thanks guys for the order which arrived on time. Can I suggest expanding your product range to target the different hallmarks of aging?”</p>",
+            "author": "Noah",
+            "author_info": "Toronto, Canada"
+          }
+        },
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-2": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>“I like that the pricing is competitive on a per gram basis. Most other NMN and Resveratrol brands that I have found online in the UAE deliver almost half the amount at similar price points.”</p>",
+            "author": "Maya",
+            "author_info": "Dubai, UAE"
+          }
+        },
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-3": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>“I look forward to seeing what other formulas you guys bring to market.”</p>",
+            "author": "Adam",
+            "author_info": "London, UK"
+          }
+        },
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-4": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>“Really impressed by your focus on the science behind the supplements. Well done team!”</p>",
+            "author": "Zahra",
+            "author_info": "Manama, Bahrain"
+          }
+        },
+        "a09faf2e-5b7e-41d8-b027-afb2d645fd5e": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>Good work that you guys do.</p><p></p>",
+            "author": "Wes",
+            "author_info": "Dubai, UAE"
+          }
+        },
+        "7fdf2c02-38b9-4d5a-bd2d-b41ef7bda3c1": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "5-stars",
+            "testimonial": "<p>I will be keeping an eye out for the next products you roll out at Fivescore. Please send my thanks to the team for the service.</p><p></p>",
+            "author": "Bonnie",
+            "author_info": "Dublin, Ireland"
+          }
+        }
+      },
+      "block_order": [
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-0",
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-1",
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-2",
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-3",
+        "template--16818173149470__4eaeb667-4f40-4473-bd8b-765082183bbf-1669358698312ae115-4",
+        "a09faf2e-5b7e-41d8-b027-afb2d645fd5e",
+        "7fdf2c02-38b9-4d5a-bd2d-b41ef7bda3c1"
+      ],
+      "settings": {
+        "title": "You don't have to take our word for it",
+        "round_images": true,
+        "color_background": "#fafafa",
+        "color_text": "#1c1d1d"
+      }
     },
     "rich-text": {
       "type": "rich-text",
       "blocks": {
         "heading": {
           "type": "heading",
-          "settings": {}
+          "settings": {
+            "title": "FiveScore Labs Mission"
+          }
         },
         "text": {
           "type": "text",
-          "settings": {}
+          "settings": {
+            "enlarge_text": false,
+            "text": "<p>Our mission and vision are simple – we are working tirelessly to help you live the longest and healthiest versions of your lives. In time, our ambition is for Fivescore Labs to be a leading resource for all things related to human longevity and healthspan. We have big hopes for our project and are excited for you to be at the centre of it!</p><p> <a href=\"/pages/about-us\" title=\"About Us\">Read More ...</a></p>"
+          }
         }
       },
       "block_order": [
         "heading",
         "text"
       ],
-      "settings": {}
+      "disabled": true,
+      "settings": {
+        "align_text": "center",
+        "narrow_column": true,
+        "divider": false
+      }
     },
-    "featured-collections": {
-      "type": "featured-collections",
+    "8d0205c5-9791-4425-8265-2e3097a43f26": {
+      "type": "featured-product",
       "blocks": {
-        "1499789718857-0": {
-          "type": "collection",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-0": {
+          "type": "price",
+          "settings": {}
+        },
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-1": {
+          "type": "separator",
+          "settings": {}
+        },
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-2": {
+          "type": "variant_picker",
           "settings": {
-            "collection": "",
-            "size": "wide"
+            "variant_labels": true,
+            "picker_type": "button",
+            "product_dynamic_variants_enable": true,
+            "color_swatches": false
           }
         },
-        "1499789718857-1": {
-          "type": "collection",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-3": {
+          "type": "buy_buttons",
           "settings": {
-            "collection": "",
-            "size": "square-small"
+            "show_dynamic_checkout": true,
+            "surface_pickup_enable": true
           }
         },
-        "1499789718857-2": {
-          "type": "collection",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-4": {
+          "type": "description",
           "settings": {
-            "collection": "",
-            "size": "square-small"
-          }
-        },
-        "1499789718857-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "size": "square-small"
-          }
-        },
-        "1499789718857-4": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "size": "square-small"
-          }
-        },
-        "1499789718857-5": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "size": "wide"
+            "is_tab": false
           }
         }
       },
       "block_order": [
-        "1499789718857-0",
-        "1499789718857-1",
-        "1499789718857-2",
-        "1499789718857-3",
-        "1499789718857-4",
-        "1499789718857-5"
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-0",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-1",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-2",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-3",
+        "template--16818173149470__8d0205c5-9791-4425-8265-2e3097a43f26-166913612682565c4e-4"
       ],
+      "disabled": true,
       "settings": {
-        "title": "",
-        "divider": false
+        "featured_product": "fivescorelabs",
+        "divider": true,
+        "sku_enable": false,
+        "image_size": "medium",
+        "product_zoom_enable": true,
+        "thumbnail_position": "below",
+        "thumbnail_arrows": false,
+        "enable_video_looping": true,
+        "product_video_style": "muted"
       }
     },
-    "fading-images": {
-      "type": "fading-images",
+    "9a896e5e-9208-404f-9ea5-4a2fadbcf585": {
+      "type": "advanced-content",
       "blocks": {
-        "1498501481980-0": {
+        "template--16818173149470__9a896e5e-9208-404f-9ea5-4a2fadbcf585-1668845748651ba957-0": {
           "type": "image",
           "settings": {
-            "image": "",
-            "slide_title1": "Beautifully animated",
-            "slide_title2": "titles and images"
+            "image": "shopify://shop_images/55.jpg",
+            "link": "",
+            "width": "50%",
+            "alignment": "top-middle"
           }
         },
-        "1498501481980-1": {
+        "597d0a92-a306-406f-acfe-ed186f8d1fd5": {
           "type": "image",
           "settings": {
-            "image": "",
-            "slide_title1": "Use this section",
-            "slide_title2": "to impress"
-          }
-        },
-        "1498501481980-2": {
-          "type": "image",
-          "settings": {
-            "image": "",
-            "slide_title1": "And highlight",
-            "slide_title2": "important details"
+            "image": "shopify://shop_images/55.jpg",
+            "link": "",
+            "width": "50%",
+            "alignment": "center"
           }
         }
       },
       "block_order": [
-        "1498501481980-0",
-        "1498501481980-1",
-        "1498501481980-2"
+        "template--16818173149470__9a896e5e-9208-404f-9ea5-4a2fadbcf585-1668845748651ba957-0",
+        "597d0a92-a306-406f-acfe-ed186f8d1fd5"
+      ],
+      "disabled": true,
+      "settings": {
+        "full_width": true,
+        "space_around": true
+      }
+    },
+    "a7a84eca-8459-4c30-bd5b-59bf64de6292": {
+      "type": "hero-video",
+      "settings": {
+        "title": "You can't stop time, but healthy ageing is a lifestyle decision that you can make today",
+        "title_size": 40,
+        "subheading": "When combined with regular exercise, a nutritional diet, adequate sleep, and intermittent fasting, scientists believe that supplementing with evidence informed compounds can support cellular health in the fight against ageing",
+        "link_text": "Shop Now",
+        "link": "shopify://collections/all",
+        "text_align": "vertical-center horizontal-center",
+        "video_url": "https://youtu.be/d140jToLIc4",
+        "overlay_opacity": 40,
+        "section_height": "550px",
+        "mobile_height": "400px"
+      }
+    },
+    "c953de5f-94f5-4361-bb7f-d28767c8dba7": {
+      "type": "text-with-icons",
+      "blocks": {
+        "template--16818173149470__c953de5f-94f5-4361-bb7f-d28767c8dba7-1669358731a4bf2782-0": {
+          "type": "text_block",
+          "settings": {
+            "icon": "plant",
+            "title": "",
+            "text": "<p>Highest Concentration of Active Ingredients </p>"
+          }
+        },
+        "template--16818173149470__c953de5f-94f5-4361-bb7f-d28767c8dba7-1669358731a4bf2782-1": {
+          "type": "text_block",
+          "settings": {
+            "icon": "shield",
+            "title": "",
+            "text": "<p>Certificates of Analysis for Every Batch</p>"
+          }
+        },
+        "template--16818173149470__c953de5f-94f5-4361-bb7f-d28767c8dba7-1669358731a4bf2782-2": {
+          "type": "text_block",
+          "settings": {
+            "icon": "thumbs-up",
+            "title": "",
+            "text": "<p>Third Party Testing for Each Batch</p>"
+          }
+        },
+        "482c4e4a-dc3f-4044-bf2d-e306978b732b": {
+          "type": "text_block",
+          "settings": {
+            "icon": "store",
+            "title": "",
+            "text": "<p>Manufactured at the Highest GMP standard facilities in the UK</p>"
+          }
+        }
+      },
+      "block_order": [
+        "template--16818173149470__c953de5f-94f5-4361-bb7f-d28767c8dba7-1669358731a4bf2782-0",
+        "template--16818173149470__c953de5f-94f5-4361-bb7f-d28767c8dba7-1669358731a4bf2782-1",
+        "template--16818173149470__c953de5f-94f5-4361-bb7f-d28767c8dba7-1669358731a4bf2782-2",
+        "482c4e4a-dc3f-4044-bf2d-e306978b732b"
       ],
       "settings": {
-        "slide_speed": 5,
-        "color_overlay": "#000000",
-        "color_overlay_opacity": 30
-      }
-    },
-    "collection-callout": {
-      "type": "collection-callout",
-      "settings": {
-        "collection": "",
-        "subtitle": "Brand new",
-        "title": "Collection callout",
-        "text": "Use this section to easily call attention to one of your collections. We'll show photos of the first 5 products.",
-        "cta_text1": "Shop Jackets",
-        "cta_link1": "",
-        "cta_text2": "Shop All",
-        "cta_link2": "",
-        "divider": false
-      }
-    },
-    "background-image-text": {
-      "type": "background-image-text",
-      "settings": {
-        "subtitle": "Impressive",
-        "title": "Large image and text",
-        "text": "<p>Pair large text with a full-width image to draw attention to an important detail of your brand or product line.</p>",
+        "title": "The Fivescore Difference",
+        "align_text": "center",
+        "desktop_columns_per_row": 4,
+        "icon_color": "#000000",
         "button_label": "",
         "button_link": "",
-        "image": "",
-        "layout": "left",
-        "height": 650
+        "divider": true
+      }
+    },
+    "265eac71-fd30-4e35-87c7-e65189150f95": {
+      "type": "blog-posts",
+      "settings": {
+        "title": "Understand the science behind the supplements",
+        "blog": "home-page",
+        "post_limit": 3,
+        "blog_show_tags": false,
+        "blog_show_date": false,
+        "blog_show_comments": false,
+        "blog_show_author": false,
+        "view_all": true,
+        "divider": false
+      }
+    },
+    "1669639024a9186d6b": {
+      "type": "apps",
+      "settings": {
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "becacd38-76b9-44dd-adc4-802e1005de27": {
+      "type": "newsletter",
+      "blocks": {
+        "template--16818173149470__becacd38-76b9-44dd-adc4-802e1005de27-166913490702e5782e-0": {
+          "type": "title",
+          "settings": {
+            "title": "Subscribe and be in the know",
+            "icon_enable": false
+          }
+        },
+        "template--16818173149470__becacd38-76b9-44dd-adc4-802e1005de27-166913490702e5782e-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Subscribe to receive special offers and our upcoming newsletter covering the latest developments in the field of geroscience.</p>"
+          }
+        },
+        "template--16818173149470__becacd38-76b9-44dd-adc4-802e1005de27-166913490702e5782e-2": {
+          "type": "form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "template--16818173149470__becacd38-76b9-44dd-adc4-802e1005de27-166913490702e5782e-0",
+        "template--16818173149470__becacd38-76b9-44dd-adc4-802e1005de27-166913490702e5782e-1",
+        "template--16818173149470__becacd38-76b9-44dd-adc4-802e1005de27-166913490702e5782e-2"
+      ],
+      "settings": {
+        "color_background": "#cfded7",
+        "color_text": "#1c1d1d"
+      }
+    },
+    "167687655507ad9742": {
+      "type": "apps",
+      "settings": {
+        "full_width": false,
+        "space_around": true
+      }
+    },
+    "16860687199af8bd95": {
+      "type": "apps",
+      "blocks": {
+        "c794de93-f267-49d4-ba88-384eab04699e": {
+          "type": "shopify://apps/instafeed/blocks/app-block/c447db20-095d-4a10-9725-b5977662c9d5",
+          "settings": {
+            "title": "",
+            "title_color": "",
+            "alignment": "center",
+            "background_color": "",
+            "html_area": ""
+          }
+        }
+      },
+      "block_order": [
+        "c794de93-f267-49d4-ba88-384eab04699e"
+      ],
+      "settings": {
+        "full_width": false,
+        "space_around": true
       }
     }
   },
   "order": [
     "hero-video",
-    "featured-collection-switcher",
+    "551db60b-4cfa-4e97-8ae6-934affcf70ef",
+    "996c429a-bef7-415c-adb2-d7409c763d72",
+    "5dbdfc58-62c8-4ddb-8122-31d8d7a53c6c",
+    "a6153d01-9659-4547-b065-808c18cb1b2f",
+    "a4ef14da-f9c9-4e3b-b708-a19be145f5ef",
+    "dcdbdbaa-6e34-4e85-9110-b5df9ebd69af",
+    "4eaeb667-4f40-4473-bd8b-765082183bbf",
     "rich-text",
-    "featured-collections",
-    "fading-images",
-    "collection-callout",
-    "background-image-text"
+    "8d0205c5-9791-4425-8265-2e3097a43f26",
+    "9a896e5e-9208-404f-9ea5-4a2fadbcf585",
+    "a7a84eca-8459-4c30-bd5b-59bf64de6292",
+    "c953de5f-94f5-4361-bb7f-d28767c8dba7",
+    "265eac71-fd30-4e35-87c7-e65189150f95",
+    "1669639024a9186d6b",
+    "becacd38-76b9-44dd-adc4-802e1005de27",
+    "167687655507ad9742",
+    "16860687199af8bd95"
   ]
 }

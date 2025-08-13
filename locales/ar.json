@@ -1,0 +1,78 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "blogs": {
+    "article": {
+      "view_all": "مشاهدة الكل",
+      "tags": "العلامات",
+      "read_more": "أكمل القراءة"
+    },
+    "comments": {
+      "title": "اترك تعليقا",
+      "name": "الاسم",
+      "email": "البريد الالكتروني",
+      "message": "الرسالة",
+      "post": "اترك تعليقا",
+      "moderated": "يرجى ملاحظة أنه يجب الموافقة على التعليقات قبل نشرها",
+      "success_moderated": "تم نشر تعليقك بنجاح. سننشره بعد قليل ، لأن مدونتنا خاضعة للإشراف.",
+      "success": "تم نشر تعليقك بنجاح! شكرًا لك!"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "عربة التسوق",
+      "remove": "مسح",
+      "note": "ملاحظة",
+      "subtotal": "المجموع",
+      "discounts": "الخصومات",
+      "shipping_at_checkout": "الشحن والضرائب وأكواد الخصم المحسوبة عند الخروج.",
+      "update": "تحديث عربة التسوق",
+      "checkout": "الدفع",
+      "empty": "عربة التسوق فارغة حاليا.",
+      "continue_browsing_html": "مواصلة التسوق",
+      "close_cart": "إغلاق عربة التسوق",
+      "reduce_quantity": "تقليل الكمية بمقدار واحد",
+      "increase_quantity": "زيادة كمية العنصر بمقدار واحد",
+      "terms": "اني اوافق على الشروط والاحكام",
+      "terms_html": "اني اوافق على الشروط والاحكام",
+      "terms_confirm": "يجب أن توافق على شروط وأحكام المبيعات للمغادرة"
+    },
+    "label": {
+      "quantity": "الكمية",
+      "total": "المجموع"
+    }
+  },
+  "shopify": {
+    "sentence": {
+      "two_words_connector": "و",
+      "last_word_connector": "، و"
+    },
+    "checkout": {
+      "general": {
+        "page_title": "الدفع",
+        "error_page_title": "خطأ",
+        "skip_to_content": "تخطى الى المحتوى",
+        "breadcrumb": "مسار التنقل",
+        "continue_button_label": "اكمل",
+        "complete_purchase_button_label": "اكمل الطلب",
+        "pay_now_button_label": "ادفع الان",
+        "authenticate_purchase_button_label": "مصادقة الدفع",
+        "edit_link_label": "تعديل",
+        "print_policies_link_label": "اطبع",
+        "cart": "عربة التسوق",
+        "close_modal_label": "اغلق",
+        "close_notice_label": "اغلق",
+        "expand_notice_label": "المزيد",
+        "continue_to_shipping_method": "المواصلة لمعلومات الشحن",
+        "continue_to_payment_method": "المواصلة للدفع"
+      }
+    }
+  }
+}

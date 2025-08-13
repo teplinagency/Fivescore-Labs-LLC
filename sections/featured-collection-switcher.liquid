@@ -58,9 +58,19 @@
   {% endif %}
 
   {%- liquid
-    capture gridView
-      render 'products_per_row', products_per_row: per_row, style: 'fractions'
-    endcapture
+    assign grid_item_width = 'small--one-half medium-up--one-third'
+    case per_row
+      when 1
+        assign grid_item_width = ''
+      when 2
+        assign grid_item_width = 'small--one-half medium-up--one-half'
+      when 3
+        assign grid_item_width = 'small--one-half medium-up--one-third'
+      when 4
+        assign grid_item_width = 'small--one-half medium-up--one-quarter'
+      when 5
+        assign grid_item_width = 'small--one-half medium-up--one-fifth'
+    endcase
   -%}
 
   <div class="page-width">
@@ -74,9 +84,9 @@
             {%- render 'product-grid-item',
               product: product,
               collection: collection,
+              grid_item_width: grid_item_width,
               per_row: per_row,
-              disable_quick_view_output: true,
-            -%}
+              disable_quick_view_output: true -%}
           {%- endfor -%}
         </div>
 
@@ -98,9 +108,9 @@
             {%- render 'product-grid-item',
               product: product,
               collection: collection,
+              grid_item_width: grid_item_width,
               per_row: per_row,
-              disable_quick_view_output: true,
-            -%}
+              disable_quick_view_output: true -%}
           {%- endfor -%}
         </div>
 
@@ -120,7 +130,7 @@
             class="grid"
             data-per-row="{{ per_row }}">
             {%- for i in (1..per_row) -%}
-              <div class="grid__item grid-product {{ gridView }}" data-aos="row-of-{{ per_row }}">
+              <div class="grid__item grid-product {{ grid_item_width }}" data-aos="row-of-{{ per_row }}">
                 <div class="grid-product__content">
                   <a href="#" class="grid-product__link">
                     <div class="grid-product__image-mask">
@@ -218,9 +228,6 @@
       "name": "t:sections.featured-collection-switcher.presets.collection_switcher.name"
     }
   ],
-  "blocks": [],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  "blocks": []
 }
 {% endschema %}

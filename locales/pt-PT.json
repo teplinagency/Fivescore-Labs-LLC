@@ -44,11 +44,11 @@
     },
     "social": {
       "share_on_facebook": "Partilhar",
-      "share_on_x": "Partilhar",
+      "share_on_twitter": "Tweetar",
       "share_on_pinterest": "Pin it",
       "alt_text": {
         "share_on_facebook": "Partilhe no Facebook",
-        "share_on_x": "Tuíte no X",
+        "share_on_twitter": "Tuíte no Twitter",
         "share_on_pinterest": "Adicione no Pinterest"
       }
     },
@@ -138,8 +138,7 @@
       "increase_quantity": "Aumente a quantidade do artigo em um",
       "terms": "Eu concordo com os termos e condições",
       "terms_html": "Eu concordo com os <a href='{{ url }}' target='_blank'>termos e condições</a>",
-      "terms_confirm": "Você deve concordar com os termos e condições de vendas para verificar",
-      "max_quantity": "Solo puedes tener {{ quantity }} de {{ title }} en tu carrito."
+      "terms_confirm": "Você deve concordar com os termos e condições de vendas para verificar"
     },
     "label": {
       "quantity": "Quantidade",

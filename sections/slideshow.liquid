@@ -15,7 +15,7 @@
 
         <button type="button" class="visually-hidden slideshow__pause" aria-live="polite">
           <span class="slideshow__pause-stop">
-            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-pause" viewBox="0 0 10 13"><path d="M0 0h3v13H0zm7 0h3v13H7z" fill-rule="evenodd"/></svg>
+            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-pause" viewBox="0 0 10 13"><g fill="#000" fill-rule="evenodd"><path d="M0 0h3v13H0zM7 0h3v13H7z"/></g></svg>
             <span class="icon__fallback-text">{{ 'sections.slideshow.pause_slideshow' | t }}</span>
           </span>
           <span class="slideshow__pause-play">
@@ -140,47 +140,46 @@
 
                   {%- if block.settings.image != blank -%}
 
-                    {% comment %} Full width images so don't need to adjust sizes attribute, fallback is 100vw {% endcomment %}
-                    {%- liquid
-                      if forloop.index == 1
-                        assign loading = section.settings.lazyload_images
-                      else
-                        assign loading = true
-                      endif
-                    -%}
+                    {% style %}
+                      .hero__image--{{ block.id }}{
+                        object-position: {{ block.settings.focal_point }};
+                      }
+                    {% endstyle %}
 
                     {% if has_mobile_image %}
-                      {% assign desktop_classes = 'small--hide hero__image hero__image--' | append: block.id %}
+                      {% assign desktop_classes = 'small--hide lazyload hero__image hero__image--' | append: block.id %}
                     {% else %}
-                      {% assign desktop_classes = 'hero__image hero__image--' | append: block.id %}
+                      {% assign desktop_classes = 'hero__image lazyload hero__image--' | append: block.id %}
                     {% endif %}
 
-                    {%- render 'image-element',
+                    {% render 'image-element'
                       img: block.settings.image,
                       img_width: 2400,
-                      loading: loading,
                       classes: desktop_classes,
-                    -%}
+                      alt: block.settings.image.alt,
+                      sizes: '100%'
+                    %}
                     {%- if has_mobile_image -%}
-                      {% assign mobile_classes = 'medium-up--hide hero__image hero__image--' | append: block.id %}
+                      {% assign mobile_classes = 'medium-up--hide lazyload hero__image hero__image--' | append: block.id %}
 
-                      {%- render 'image-element',
+                      {% render 'image-element'
                         img: block.settings.image_mobile,
-                        img_width: 1200,
-                        loading: loading,
+                        img_height: 1200,
                         classes: mobile_classes,
-                      -%}
+                        alt: block.settings.image_mobile.alt,
+                        sizes: '100%'
+                      %}
                     {%- endif -%}
                   {%- else -%}
                     {%- if template == 'password' -%}
-                      {%- assign password_image = 'password-page-background.jpg' -%}
-                      {%- render 'image-element',
-                        asset: password_image,
-                        loading: section.settings.lazyload_images,
-                        host: 'theme',
-                        type: 'asset',
+                      {%- assign password_image = 'password-page-background.jpg' | asset_url -%}
+
+                      {% render 'image-element'
+                        img: password_image,
+                        img_height: 2400,
                         classes: 'hero__image',
-                      -%}
+                        sizes: '100%'
+                      %}
                     {%- else -%}
                       {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
                     {%- endif -%}
@@ -361,13 +360,6 @@
       "max": 10,
       "step": 1,
       "unit": "s"
-    },
-    {
-      "type": "checkbox",
-      "id": "lazyload_images",
-      "label": "t:common.lazyload_images.label",
-      "info": "t:common.lazyload_images.info",
-      "default": true
     }
   ],
   "blocks": [
@@ -475,6 +467,51 @@
           "max": 100,
           "step": 2,
           "unit": "%"
+        },
+        {
+          "type": "select",
+          "id": "focal_point",
+          "label": "t:sections.slideshow.blocks.slide.settings.focal_point.label",
+          "info": "t:sections.slideshow.blocks.slide.settings.focal_point.info",
+          "default": "center center",
+          "options": [
+            {
+              "value": "20% 0",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.20_0.label"
+            },
+            {
+              "value": "top center",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.top_center.label"
+            },
+            {
+              "value": "80% 0",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.80_0.label"
+            },
+            {
+              "value": "20% 50%",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.20_50.label"
+            },
+            {
+              "value": "center center",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.center_center.label"
+            },
+            {
+              "value": "80% 50%",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.80_50.label"
+            },
+            {
+              "value": "20% 100%",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.20_100.label"
+            },
+            {
+              "value": "bottom center",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.bottom_center.label"
+            },
+            {
+              "value": "80% 100%",
+              "label": "t:sections.slideshow.blocks.slide.settings.focal_point.options.80_100.label"
+            }
+          ]
         }
       ]
     }
@@ -503,9 +540,6 @@
         }
       ]
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}

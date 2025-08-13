@@ -1,15 +1,7 @@
 {%- liquid
-  capture gridView
-    render 'products_per_row', products_per_row: per_row, style: 'fractions'
-  endcapture
-
-  # These assignments have no effect if a sizes parameter is passed in
-  assign sizeVariable = gridView
-  if fallback != blank
-    assign fallback = fallback
-  else
-    assign fallback = 'variable'
-  endif
+  unless grid_item_width
+    assign grid_item_width = 'medium-up--one-quarter small--one-half'
+  endunless
 
   assign on_sale = false
   if product.compare_at_price > product.price
@@ -34,7 +26,7 @@
   endif
 -%}
 
-<div class="grid__item grid-product {{ gridView }} {% if settings.quick_shop_enable %} grid-product__has-quick-shop{% endif %}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product.handle }}" data-product-id="{{ product.id }}">
+<div class="grid__item grid-product {{ grid_item_width }}{% if settings.quick_shop_enable %} grid-product__has-quick-shop{% endif %}" data-aos="row-of-{{ per_row }}" data-product-handle="{{ product.handle }}" data-product-id="{{ product.id }}">
   <div class="grid-product__content">
     {%- if has_custom_label -%}
       <div class="grid-product__tag grid-product__tag--custom">
@@ -59,73 +51,50 @@
         {%- endif -%}
       {%- endif -%}
     {%- endif -%}
-    {%- if settings.quick_shop_enable and type != 'horizontal' -%}
-      <button class="quick-product__btn js-modal-open-quick-modal-{{ product.id }} small--hide">
+    {%- if settings.quick_shop_enable -%}
+      <div class="quick-product__btn quick-product__btn--not-ready js-modal-open-quick-modal-{{ product.id }} small--hide">
         <span class="quick-product__label">{{ settings.quick_shop_text }}</span>
-      </button>
+      </div>
     {%- endif -%}
 
     {%- liquid
-      assign imageRatio = settings.product_grid_image_size
       assign fixed_aspect_ratio = false
-      unless imageRatio == 'natural'
+      unless settings.product_grid_image_size == 'natural'
         assign fixed_aspect_ratio = true
       endunless
-
-      if image_style == 'circle'
-        assign fixed_aspect_ratio = true
-        assign imageRatio = 'square'
-      endif
-
     -%}
 
     {%- assign preview_image = product.featured_media.preview_image -%}
+    {%- assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
 
     <a href="{{ product.url | within: collection }}" class="grid-product__link">
       <div class="grid-product__image-mask">
         {%- if fixed_aspect_ratio -%}
           <div
-            class="grid__image-ratio grid__image-ratio--{% if image_style == 'circle' %}square{% else %}{{ settings.product_grid_image_size }}{% endif %}"
-          >
-            {%- capture image_classes -%}
-              {% unless settings.product_grid_image_fill %} grid__image-contain{% endunless %} image-style--{{ image_style }}
-            {%- endcapture -%}
-            {%- if preview_image != blank -%}
-              {%- render 'image-element',
-                img: preview_image,
-                classes: image_classes,
-                sizes: sizes,
-                sizeVariable: sizeVariable,
-                fallback: fallback,
-                widths: '360, 540, 720, 900, 1080',
-              -%}
-            {%- else -%}
-              {%- capture placeholder -%}product-{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
-              <div class="product-image--placeholder">{{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}</div>
-            {%- endif -%}
+            class="grid__image-ratio grid__image-ratio--{{ settings.product_grid_image_size }}">
+            <img class="lazyload{% unless settings.product_grid_image_fill %} grid__image-contain{% endunless %}"
+                data-src="{{ img_url }}"
+                data-widths="[360, 540, 720, 900, 1080]"
+                data-aspectratio="{{ preview_image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ preview_image.alt | escape }}">
           </div>
         {%- else -%}
           <div class="image-wrap"
-            {% if preview_image != blank %}
-              style="height: 0; padding-bottom: {{ 100 | divided_by: preview_image.aspect_ratio }}%;"
-            {% endif %}
+            style="height: 0; padding-bottom: {{ 100 | divided_by: preview_image.aspect_ratio }}%;"
             >
-            {%- if preview_image != blank -%}
-              {%- capture image_classes -%}
-                grid-product__image image-style--{{ image_style }}
-              {%- endcapture -%}
-              {%- render 'image-element',
-                img: preview_image,
-                sizes: sizes,
-                sizeVariable: sizeVariable,
-                fallback: fallback,
-                classes: image_classes,
-                widths: '180, 360, 540, 720, 900, 1080',
-              -%}
-            {%- else -%}
-              {%- capture placeholder -%}product-{% cycle 1, 2, 3, 4, 5, 6 %}{%- endcapture -%}
-              <div class="product-image--placeholder">{{ placeholder | placeholder_svg_tag: 'placeholder-svg' }}</div>
-            {%- endif -%}
+            {%- assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="grid-product__image lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[180, 360, 540, 720, 900, 1080]"
+                data-aspectratio="{{ preview_image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ preview_image.alt | escape }}">
+            <noscript>
+              <img class="grid-product__image lazyloaded"
+                src="{{ preview_image | img_url: '400x' }}"
+                alt="{{ preview_image.alt | escape }}">
+            </noscript>
           </div>
         {%- endif -%}
 
@@ -133,18 +102,14 @@
           {%- for image in product.images offset: 1 limit: 1 -%}
             {%- assign second_image = image -%}
           {%- endfor -%}
-          {%- capture image_classes -%}
-            image-style--{{ image_style }}
-          {%- endcapture -%}
           <div class="grid-product__secondary-image small--hide">
-            {%- render 'image-element',
-              img: second_image,
-              classes: image_classes,
-              sizes: sizes,
-              sizeVariable: sizeVariable,
-              fallback: fallback,
-              widths: '360, 540, 720, 1000',
-            -%}
+            {%- assign img_url = second_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[360, 540, 720, 1000]"
+                data-aspectratio="{{ second_image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ second_image.alt }}">
           </div>
         {%- endif -%}
       </div>
@@ -187,98 +152,53 @@
             </div>
           {%- endif -%}
         </div>
-
-        {%- if type == 'horizontal' -%}
-          {%- if settings.enable_swatches -%}
-            {%- assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase -%}
-            {%- assign swatch_file_extension = 'png' -%}
-
-            {%- for option in product.options_with_values -%}
-              {%- liquid
-                assign option_name = option.name | downcase
-                assign is_color = false
-                if option_name contains swatch_trigger
-                  assign is_color = true
-                elsif swatch_trigger == 'color' and option_name contains 'colour'
-                  assign is_color = true
-                endif
-              -%}
-              {%- if is_color -%}
-                {%- assign option_index = forloop.index0 -%}
-                {%- assign values = '' -%}
-                <div class="grid-product__colors">
-                  {%- for variant in product.variants -%}
-                    {%- assign value = variant.options[option_index] %}
-                    {%- unless values contains value -%}
-                      {%- liquid
-                        assign values = values | join: ',' | append: ',' | append: value | split: ','
-
-                        assign color_file_name = value | handle | append: '.' | append: swatch_file_extension
-                        assign color_image = color_file_name | file_img_url: '50x50' | prepend: 'https:' | split: '?' | first
-                        assign color_swatch_fallback = value | split: ' ' | last | handle
-                        assign color_count = color_count | plus: 1
-                      -%}
-
-                      <span
-                        href="{{ variant.url | within: collection }}"
-                        class="color-swatch color-swatch--small"
-                        aria-label="{{ product.title }} - {{ value }}"
-                        style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}">
-                      </span>
-                    {%- endunless -%}
-                  {%- endfor -%}
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
-        {%- endif -%}
       </div>
     </a>
+    {%- if settings.enable_swatches -%}
+      {%- assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase -%}
+      {%- assign swatch_file_extension = 'png' -%}
 
-    {% unless type == 'horizontal' %}
-      {%- if settings.enable_swatches -%}
-        {%- assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase -%}
-        {%- assign swatch_file_extension = 'png' -%}
+      {%- for option in product.options_with_values -%}
+        {%- liquid
+          assign option_name = option.name | downcase
+          assign is_color = false
+          if option_name contains swatch_trigger
+            assign is_color = true
+          elsif swatch_trigger == 'color' and option_name contains 'colour'
+            assign is_color = true
+          endif
+        -%}
+        {%- if is_color -%}
+          {%- assign option_index = forloop.index0 -%}
+          {%- assign values = '' -%}
+          <div class="grid-product__colors">
+            {%- for variant in product.variants -%}
+              {%- assign value = variant.options[option_index] %}
+              {%- unless values contains value -%}
+                {%- liquid
+                  assign values = values | join: ',' | append: ',' | append: value | split: ','
 
-        {%- for option in product.options_with_values -%}
-          {%- liquid
-            assign option_name = option.name | downcase
-            assign is_color = false
-            if option_name contains swatch_trigger
-              assign is_color = true
-            elsif swatch_trigger == 'color' and option_name contains 'colour'
-              assign is_color = true
-            endif
-          -%}
-          {%- if is_color -%}
-            {%- assign option_index = forloop.index0 -%}
-            {%- assign values = '' -%}
-            <div class="grid-product__colors">
-              {%- for variant in product.variants -%}
-                {%- assign value = variant.options[option_index] %}
-                {%- unless values contains value -%}
-                  {%- liquid
-                    assign values = values | join: ',' | append: ',' | append: value | split: ','
+                  assign color_file_name = value | handle | append: '.' | append: swatch_file_extension
+                  assign color_image = color_file_name | file_img_url: '50x50' | prepend: 'https:' | split: '?' | first
+                  assign color_swatch_fallback = value | split: ' ' | last | handle
+                  assign color_count = color_count | plus: 1
+                -%}
 
-                    assign color_file_name = value | handle | append: '.' | append: swatch_file_extension
-                    assign color_image = color_file_name | file_img_url: '50x50' | prepend: 'https:' | split: '?' | first
-                    assign color_swatch_fallback = value | split: ' ' | last | handle
-                    assign color_count = color_count | plus: 1
-                  -%}
-
-                  <a
-                    href="{{ variant.url | within: collection }}"
-                    class="color-swatch color-swatch--small"
-                    aria-label="{{ product.title }} - {{ value }}"
-                    style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}">
-                  </a>
-                {%- endunless -%}
-              {%- endfor -%}
-            </div>
-          {%- endif -%}
-        {%- endfor -%}
-      {%- endif -%}
-    {% endunless %}
+                <a
+                  href="{{ variant.url | within: collection }}"
+                  class="color-swatch color-swatch--small"
+                  aria-label="{{ product.title }} - {{ value }}"
+                  style="background-color: {{ color_swatch_fallback }};{% if images[color_file_name] != blank %}  background-image: url({{ color_image }});{% endif %}">
+                </a>
+              {%- endunless -%}
+             {%- endfor -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+    {%- if settings.enable_product_reviews -%}
+      <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+    {%- endif -%}
   </div>
 
   {%- unless disable_quick_view_output -%}

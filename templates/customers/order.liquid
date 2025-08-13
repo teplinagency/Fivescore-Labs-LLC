@@ -129,7 +129,7 @@
 
           {% if order.cart_level_discount_applications != blank %}
             <tr>
-              {%- for discount_application in order.cart_level_discount_applications %}
+              {%- for discount_application in order.cart_level_discount_applicatio-ns %}
                 <th scope="row" colspan="4" class="small--hide">
                   {{ 'customer.order.discount' | t }} | {{ discount_application.title }}
                 </th>

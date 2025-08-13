@@ -8,20 +8,17 @@
       age-verification-popup--image-false
     {% endif %}
   "
+  data-enabled="{{ section.settings.enable_age_verification_popup }}"
   data-test-mode="{{ section.settings.enable_test_mode }}"
   data-section-id="{{ section.id }}"
 >
   {% if section.settings.image != blank %}
-    <div class="age-verification-popup__background-image-wrapper" data-background-image>
-      {% comment %} Full width image so don't need to adjust sizes attribute, fallback is 100vw {% endcomment %}
-      {%- render 'image-element',
-        img: section.settings.image,
-        img_width: 2400,
-        classes: 'age-verification-popup__background-image',
-      -%}
+    <div class="age-verification-popup__background-image-wrapper">
+      <div class="age-verification-popup__background-image" data-background-image></div>
     </div>
     {% style %}
       .age-verification-popup__background-image {
+        background-image: url({{ section.settings.image | image_url: width: '2400' }});
         {% if section.settings.blur_image %}
           filter: blur(4px);
           transform: scale(1.03);
@@ -30,7 +27,7 @@
     {% endstyle %}
   {% endif %}
 
-  <div class="modal__inner" data-nosnippet>
+  <div class="modal__inner">
     <div class="modal__centered">
       <div
         class="
@@ -105,6 +102,12 @@
   {
     "name": "t:sections.age-verification-popup.name",
     "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_age_verification_popup",
+        "label": "t:sections.age-verification-popup.settings.enable_age_verification_popup.label",
+        "default": false
+      },
       {
         "type": "checkbox",
         "id": "enable_test_mode",

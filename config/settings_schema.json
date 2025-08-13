@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Motion",
     "theme_author": "Archetype Themes",
-    "theme_version": "11.0.0",
+    "theme_version": "10.1.0",
     "theme_documentation_url": "https://archetypethemes.co/blogs/motion",
     "theme_support_url": "https://archetypethemes.co/pages/support#motion"
   },
@@ -227,7 +227,7 @@
         "type": "font_picker",
         "id": "type_header_font_family",
         "label": "t:settings_schema.typography.settings.type_header_font_family.label",
-        "default": "chivo_n4"
+        "default": "poppins_n7"
       },
       {
         "type": "select",
@@ -323,7 +323,7 @@
         "type": "font_picker",
         "id": "type_base_font_family",
         "label": "t:settings_schema.typography.settings.type_base_font_family.label",
-        "default": "chivo_n4"
+        "default": "poppins_n5"
       },
       {
         "type": "select",
@@ -698,6 +698,19 @@
         "type": "checkbox",
         "id": "enable_swatches",
         "label": "t:settings_schema.product_tiles.settings.enable_swatches.label"
+      },
+      {
+        "type": "header",
+        "content": "t:settings_schema.product_tiles.settings.header_product_reviews"
+      },
+      {
+        "type": "paragraph",
+        "content": "t:settings_schema.product_tiles.settings.content"
+      },
+      {
+        "type": "checkbox",
+        "label": "t:settings_schema.product_tiles.settings.enable_product_reviews.label",
+        "id": "enable_product_reviews"
       }
     ]
   },
@@ -879,10 +892,39 @@
         "default": true
       },
       {
+        "type": "select",
+        "id": "search_type",
+        "label": "t:settings_schema.search.settings.search_type.label",
+        "default": "product,article,page,collection",
+        "options": [
+          {
+            "value": "product",
+            "label": "t:settings_schema.search.settings.search_type.options.product.label"
+          },
+          {
+            "value": "product,page",
+            "label": "t:settings_schema.search.settings.search_type.options.product_page.label"
+          },
+          {
+            "value": "product,article",
+            "label": "t:settings_schema.search.settings.search_type.options.product_article.label"
+          },
+          {
+            "value": "product,article,page",
+            "label": "t:settings_schema.search.settings.search_type.options.product_article_page.label"
+          },
+          {
+            "value": "product,article,page,collection",
+            "label": "t:settings_schema.search.settings.search_type.options.product_article_page_collection.label"
+          }
+        ]
+      },
+      {
         "type": "checkbox",
         "id": "predictive_search_enabled",
         "label": "t:settings_schema.search.settings.predictive_search_enabled.label",
-        "default": true
+        "default": true,
+        "info": "t:settings_schema.search.settings.predictive_search_enabled.info"
       }
     ]
   },

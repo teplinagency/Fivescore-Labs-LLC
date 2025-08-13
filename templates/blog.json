@@ -9,28 +9,67 @@
  */
 {
   "sections": {
+    "c21e070d-8428-405c-942c-e69c42744137": {
+      "type": "hero-video",
+      "settings": {
+        "title": "",
+        "title_size": 80,
+        "subheading": "",
+        "link_text": "",
+        "link": "",
+        "text_align": "vertical-center horizontal-center",
+        "video_url": "https://youtu.be/3Qrukzb8oRQ",
+        "overlay_opacity": 30,
+        "section_height": "550px",
+        "mobile_height": "250px"
+      }
+    },
     "main": {
       "type": "blog-template",
-      "settings": {}
+      "settings": {
+        "blog_show_tag_filter": false,
+        "blog_show_rss": false,
+        "blog_show_tags": false,
+        "blog_show_date": false,
+        "blog_show_comments": false,
+        "blog_show_author": false
+      }
     },
     "featured-collections": {
       "type": "featured-collections",
+      "disabled": true,
       "blocks": {
         "collection1": {
           "type": "collection",
-          "settings": {}
+          "settings": {
+            "collection": "",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
         },
         "collection2": {
           "type": "collection",
-          "settings": {}
+          "settings": {
+            "collection": "",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
         },
         "collection3": {
           "type": "collection",
-          "settings": {}
+          "settings": {
+            "collection": "",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
         },
         "collection4": {
           "type": "collection",
-          "settings": {}
+          "settings": {
+            "collection": "",
+            "focal_point": "center center",
+            "size": "square-small"
+          }
         }
       },
       "block_order": [
@@ -40,11 +79,14 @@
         "collection4"
       ],
       "settings": {
-        "title": "You may also like"
+        "title": "You may also like",
+        "divider": false,
+        "enable_gutter": false
       }
     }
   },
   "order": [
+    "c21e070d-8428-405c-942c-e69c42744137",
     "main",
     "featured-collections"
   ]

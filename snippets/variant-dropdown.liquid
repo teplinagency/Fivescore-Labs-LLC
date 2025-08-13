@@ -11,7 +11,7 @@
       data-index="option{{ forloop.index }}">
       {%- for value in option.values -%}
         {%- assign variant_label_state = true -%}
-        {% if product.options.size == 1 and block.settings.product_dynamic_variants_enable %}
+        {% if product.options.size == 1 %}
           {% unless product.variants[forloop.index0].available %}
             {%- assign variant_label_state = false -%}
           {% endunless %}

@@ -42,20 +42,16 @@
               {%- endif -%}
               {%- if block.settings.image != blank -%}
                 <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;">
-                  {%- liquid
-                    assign blockWidth = block.settings.width | remove: '%' | times: 1
-                    if forloop.index == 1 and blockWidth >= 50
-                      assign loading = section.settings.lazyload_images
-                    else
-                      assign loading = true
-                    endif
-                  -%}
-                  {%- render 'image-element',
-                    img: block.settings.image,
-                    loading: loading,
-                    sizeVariable: block.settings.width,
-                    widths: '360, 540, 720, 900, 1080, 1600',
-                  -%}
+                  {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                  <img class="lazyload"
+                      data-src="{{ img_url }}"
+                      data-widths="[360, 540, 720, 900, 1080, 1600]"
+                      data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ block.settings.image.alt }}">
+                  <noscript>
+                    <img class="lazyloaded" src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.image.alt }}">
+                  </noscript>
                 </div>
                 {%- else -%}
                   <div class="image-wrap">
@@ -104,13 +100,6 @@
       "type": "checkbox",
       "id": "space_around",
       "label": "t:sections.advanced-content.settings.space_around.label",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "lazyload_images",
-      "label": "t:common.lazyload_images.label",
-      "info": "t:common.lazyload_images.info",
       "default": true
     }
   ],
@@ -269,9 +258,6 @@
         }
       ]
     }
-  ],
-  "disabled_on": {
-    "groups": ["custom.popups"]
-  }
+  ]
 }
 {% endschema %}

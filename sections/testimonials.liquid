@@ -30,7 +30,7 @@
             <blockquote class="testimonials-slider__text">
 
               {%- if block.settings.icon == 'quote' -%}
-                <span class="quote-icon"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766Zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766Z" fill-rule="evenodd"/></svg></span>
+                <span class="quote-icon"><svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-quote" viewBox="0 0 41 35"><path d="M10.208 17.711h6.124v16.332H0V21.684C0 8.184 5.444.956 16.332 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766zm24.498 0h6.124v16.332H24.498V21.684C24.498 8.184 29.942.956 40.83 0v6.125c-4.083 1.14-6.124 4.414-6.124 9.82v1.766z" fill="#000" fill-rule="evenodd"/></svg></span>
               {%- elsif block.settings.icon == '5-stars' -%}
                 <span class="testimonial-stars">★★★★★</span>
               {%- elsif block.settings.icon == '4-stars' -%}
@@ -51,28 +51,14 @@
                 <div class="testimonial-meta">
                   {%- if block.settings.image != blank -%}
                     <div
-                      class="testimonial-image{% if section.settings.round_images %} testimonial-image--round{% endif %}">
-                      <div class="image-wrap"
-                        {% if section.settings.round_images == false %}
-                          style="height: 0; padding-bottom: {{ 100 | divided_by: block.settings.image.aspect_ratio }}%;"
-                        {% endif %}
-                      >
-                        {%- liquid
-                          if section.settings.round_images
-                            assign sizeVariable = '65px'
-                          else
-                            assign sizeVariable = '142px'
-                          endif
-
-                          assign fallback = sizeVariable
-                        -%}
-                        {%- render 'image-element',
-                          img: block.settings.image,
-                          sizeVariable: sizeVariable,
-                          fallback: fallback,
-                          widths: '180, 360, 540, 720',
-                        -%}
-                      </div>
+                      class="image-wrap testimonail-image{% if section.settings.round_images %} testimonail-image--round{% endif %}">
+                      {%- assign img_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                      <img class="lazyload"
+                          data-src="{{ img_url }}"
+                          data-widths="[180, 360, 540, 720]"
+                          data-aspectratio="{{ block.settings.image.aspect_ratio }}"
+                          data-sizes="auto"
+                          alt="{{ block.settings.image.alt }}">
                     </div>
                   {%- endif -%}
                   {%- if block.settings.author != blank -%}
@@ -210,9 +196,6 @@
         }
       ]
     }
-  ],
-  "disabled_on": {
-    "groups": ["footer", "header", "custom.popups"]
-  }
+  ]
 }
 {% endschema %}
